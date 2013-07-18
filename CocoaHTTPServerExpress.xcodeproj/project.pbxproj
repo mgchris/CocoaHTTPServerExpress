@@ -25,13 +25,16 @@
 		54A997961784CA9A00A60BF7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 54A997941784CA9A00A60BF7 /* InfoPlist.strings */; };
 		54A997AD1784CB4B00A60BF7 /* HTTPExpressConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 54A997A61784CB4B00A60BF7 /* HTTPExpressConnection.m */; };
 		54A997AE1784CB4B00A60BF7 /* HTTPExpressConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 54A997A61784CB4B00A60BF7 /* HTTPExpressConnection.m */; };
-		54A997AF1784CB4B00A60BF7 /* HTTPExpressManager+HTTPExpressEvaluationBlocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 54A997A81784CB4B00A60BF7 /* HTTPExpressManager+HTTPExpressEvaluationBlocks.m */; };
-		54A997B01784CB4B00A60BF7 /* HTTPExpressManager+HTTPExpressEvaluationBlocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 54A997A81784CB4B00A60BF7 /* HTTPExpressManager+HTTPExpressEvaluationBlocks.m */; };
-		54A997B11784CB4B00A60BF7 /* HTTPExpressManager+HTTPExpressResponseBlocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 54A997AA1784CB4B00A60BF7 /* HTTPExpressManager+HTTPExpressResponseBlocks.m */; };
-		54A997B21784CB4B00A60BF7 /* HTTPExpressManager+HTTPExpressResponseBlocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 54A997AA1784CB4B00A60BF7 /* HTTPExpressManager+HTTPExpressResponseBlocks.m */; };
 		54A997B31784CB4B00A60BF7 /* HTTPExpressManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 54A997AC1784CB4B00A60BF7 /* HTTPExpressManager.m */; };
 		54A997B41784CB4B00A60BF7 /* HTTPExpressManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 54A997AC1784CB4B00A60BF7 /* HTTPExpressManager.m */; };
 		54A997B61784CB8600A60BF7 /* HTTPExpressConnectionSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 54A997B51784CB8600A60BF7 /* HTTPExpressConnectionSpec.m */; };
+		54DDE0DB1797217100E327CA /* HTTPExpressEvaluationBlockFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 54DDE0DA1797217100E327CA /* HTTPExpressEvaluationBlockFactory.m */; };
+		54DDE0DC1797217100E327CA /* HTTPExpressEvaluationBlockFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 54DDE0DA1797217100E327CA /* HTTPExpressEvaluationBlockFactory.m */; };
+		54DDE0E01797244F00E327CA /* HTTPExpressResponseBlockFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 54DDE0DF1797244F00E327CA /* HTTPExpressResponseBlockFactory.m */; };
+		54DDE0E11797244F00E327CA /* HTTPExpressResponseBlockFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 54DDE0DF1797244F00E327CA /* HTTPExpressResponseBlockFactory.m */; };
+		54DDE0E317972E1800E327CA /* TestData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 54DDE0E217972E1800E327CA /* TestData.plist */; };
+		54DDE0E517975C1400E327CA /* HTTPExpressEvaluationBlockFactorySpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 54DDE0E417975C1400E327CA /* HTTPExpressEvaluationBlockFactorySpec.m */; };
+		54DDE0E71797635E00E327CA /* HTTPExpressResponseBlockFactorySpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 54DDE0E61797635E00E327CA /* HTTPExpressResponseBlockFactorySpec.m */; };
 		67648F32FA73455A9B8E7FCA /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E3CA9A64F05435196826B1D /* libPods.a */; };
 		B30434147EB54529B3C87484 /* libPods-CocoaHTTPServerExpressTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E7A1F9461BDE437692548512 /* libPods-CocoaHTTPServerExpressTests.a */; };
 /* End PBXBuildFile section */
@@ -71,13 +74,17 @@
 		54A997A41784CB4B00A60BF7 /* HTTPExpress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPExpress.h; sourceTree = "<group>"; };
 		54A997A51784CB4B00A60BF7 /* HTTPExpressConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPExpressConnection.h; sourceTree = "<group>"; };
 		54A997A61784CB4B00A60BF7 /* HTTPExpressConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPExpressConnection.m; sourceTree = "<group>"; };
-		54A997A71784CB4B00A60BF7 /* HTTPExpressManager+HTTPExpressEvaluationBlocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HTTPExpressManager+HTTPExpressEvaluationBlocks.h"; sourceTree = "<group>"; };
-		54A997A81784CB4B00A60BF7 /* HTTPExpressManager+HTTPExpressEvaluationBlocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "HTTPExpressManager+HTTPExpressEvaluationBlocks.m"; sourceTree = "<group>"; };
-		54A997A91784CB4B00A60BF7 /* HTTPExpressManager+HTTPExpressResponseBlocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HTTPExpressManager+HTTPExpressResponseBlocks.h"; sourceTree = "<group>"; };
-		54A997AA1784CB4B00A60BF7 /* HTTPExpressManager+HTTPExpressResponseBlocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "HTTPExpressManager+HTTPExpressResponseBlocks.m"; sourceTree = "<group>"; };
 		54A997AB1784CB4B00A60BF7 /* HTTPExpressManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPExpressManager.h; sourceTree = "<group>"; };
 		54A997AC1784CB4B00A60BF7 /* HTTPExpressManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPExpressManager.m; sourceTree = "<group>"; };
 		54A997B51784CB8600A60BF7 /* HTTPExpressConnectionSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPExpressConnectionSpec.m; sourceTree = "<group>"; };
+		54DDE0D91797217100E327CA /* HTTPExpressEvaluationBlockFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPExpressEvaluationBlockFactory.h; sourceTree = "<group>"; };
+		54DDE0DA1797217100E327CA /* HTTPExpressEvaluationBlockFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPExpressEvaluationBlockFactory.m; sourceTree = "<group>"; };
+		54DDE0DD1797235500E327CA /* HTTPExpressContant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HTTPExpressContant.h; sourceTree = "<group>"; };
+		54DDE0DE1797244F00E327CA /* HTTPExpressResponseBlockFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPExpressResponseBlockFactory.h; sourceTree = "<group>"; };
+		54DDE0DF1797244F00E327CA /* HTTPExpressResponseBlockFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPExpressResponseBlockFactory.m; sourceTree = "<group>"; };
+		54DDE0E217972E1800E327CA /* TestData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TestData.plist; sourceTree = "<group>"; };
+		54DDE0E417975C1400E327CA /* HTTPExpressEvaluationBlockFactorySpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPExpressEvaluationBlockFactorySpec.m; sourceTree = "<group>"; };
+		54DDE0E61797635E00E327CA /* HTTPExpressResponseBlockFactorySpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPExpressResponseBlockFactorySpec.m; sourceTree = "<group>"; };
 		7E3CA9A64F05435196826B1D /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7A1F9461BDE437692548512 /* libPods-CocoaHTTPServerExpressTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CocoaHTTPServerExpressTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7A3BAA02D564CCA956748DA /* Pods/Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
@@ -176,6 +183,8 @@
 			isa = PBXGroup;
 			children = (
 				54A997B51784CB8600A60BF7 /* HTTPExpressConnectionSpec.m */,
+				54DDE0E417975C1400E327CA /* HTTPExpressEvaluationBlockFactorySpec.m */,
+				54DDE0E61797635E00E327CA /* HTTPExpressResponseBlockFactorySpec.m */,
 				54A997921784CA9A00A60BF7 /* Supporting Files */,
 			);
 			path = CocoaHTTPServerExpressTests;
@@ -186,6 +195,7 @@
 			children = (
 				54A997931784CA9A00A60BF7 /* CocoaHTTPServerExpressTests-Info.plist */,
 				54A997941784CA9A00A60BF7 /* InfoPlist.strings */,
+				54DDE0E217972E1800E327CA /* TestData.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -194,14 +204,15 @@
 			isa = PBXGroup;
 			children = (
 				54A997A41784CB4B00A60BF7 /* HTTPExpress.h */,
+				54DDE0DD1797235500E327CA /* HTTPExpressContant.h */,
 				54A997A51784CB4B00A60BF7 /* HTTPExpressConnection.h */,
 				54A997A61784CB4B00A60BF7 /* HTTPExpressConnection.m */,
-				54A997A71784CB4B00A60BF7 /* HTTPExpressManager+HTTPExpressEvaluationBlocks.h */,
-				54A997A81784CB4B00A60BF7 /* HTTPExpressManager+HTTPExpressEvaluationBlocks.m */,
-				54A997A91784CB4B00A60BF7 /* HTTPExpressManager+HTTPExpressResponseBlocks.h */,
-				54A997AA1784CB4B00A60BF7 /* HTTPExpressManager+HTTPExpressResponseBlocks.m */,
 				54A997AB1784CB4B00A60BF7 /* HTTPExpressManager.h */,
 				54A997AC1784CB4B00A60BF7 /* HTTPExpressManager.m */,
+				54DDE0D91797217100E327CA /* HTTPExpressEvaluationBlockFactory.h */,
+				54DDE0DA1797217100E327CA /* HTTPExpressEvaluationBlockFactory.m */,
+				54DDE0DE1797244F00E327CA /* HTTPExpressResponseBlockFactory.h */,
+				54DDE0DF1797244F00E327CA /* HTTPExpressResponseBlockFactory.m */,
 			);
 			name = HTTPExpress;
 			path = CocoaHTTPServerExpress/HTTPExpress;
@@ -257,7 +268,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0460;
-				ORGANIZATIONNAME = mgchris;
+				ORGANIZATIONNAME = "Christopher Evans";
 			};
 			buildConfigurationList = 54A9975F1784CA9A00A60BF7 /* Build configuration list for PBXProject "CocoaHTTPServerExpress" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -295,6 +306,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				54A997961784CA9A00A60BF7 /* InfoPlist.strings in Resources */,
+				54DDE0E317972E1800E327CA /* TestData.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -385,9 +397,9 @@
 				54A997781784CA9A00A60BF7 /* AppDelegate.m in Sources */,
 				54A997811784CA9A00A60BF7 /* ViewController.m in Sources */,
 				54A997AD1784CB4B00A60BF7 /* HTTPExpressConnection.m in Sources */,
-				54A997AF1784CB4B00A60BF7 /* HTTPExpressManager+HTTPExpressEvaluationBlocks.m in Sources */,
-				54A997B11784CB4B00A60BF7 /* HTTPExpressManager+HTTPExpressResponseBlocks.m in Sources */,
 				54A997B31784CB4B00A60BF7 /* HTTPExpressManager.m in Sources */,
+				54DDE0DB1797217100E327CA /* HTTPExpressEvaluationBlockFactory.m in Sources */,
+				54DDE0E01797244F00E327CA /* HTTPExpressResponseBlockFactory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -396,10 +408,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				54A997AE1784CB4B00A60BF7 /* HTTPExpressConnection.m in Sources */,
-				54A997B01784CB4B00A60BF7 /* HTTPExpressManager+HTTPExpressEvaluationBlocks.m in Sources */,
-				54A997B21784CB4B00A60BF7 /* HTTPExpressManager+HTTPExpressResponseBlocks.m in Sources */,
 				54A997B41784CB4B00A60BF7 /* HTTPExpressManager.m in Sources */,
 				54A997B61784CB8600A60BF7 /* HTTPExpressConnectionSpec.m in Sources */,
+				54DDE0DC1797217100E327CA /* HTTPExpressEvaluationBlockFactory.m in Sources */,
+				54DDE0E11797244F00E327CA /* HTTPExpressResponseBlockFactory.m in Sources */,
+				54DDE0E517975C1400E327CA /* HTTPExpressEvaluationBlockFactorySpec.m in Sources */,
+				54DDE0E71797635E00E327CA /* HTTPExpressResponseBlockFactorySpec.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

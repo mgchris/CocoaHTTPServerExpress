@@ -1,15 +1,15 @@
 //
-//  HTTPExpressManager+HTTPExpressResponseBlocks.m
+//  HTTPExpressResponseBlockFactory.m
 //  CocoaHTTPServerExpress
 //
-//  Created by chrise26 on 7/1/13.
-//  Copyright (c) 2013 mgchris. All rights reserved.
+//  Created by Christopher Evans on 7/17/13.
+//  Copyright (c) 2013 Christopher Evans. All rights reserved.
 //
 
-#import "HTTPExpressManager+HTTPExpressResponseBlocks.h"
+#import "HTTPExpressResponseBlockFactory.h"
 #import "HTTPDataResponse.h"
 
-@implementation HTTPExpressManager (HTTPExpressResponseBlocks)
+@implementation HTTPExpressResponseBlockFactory
 
 + (HTTPExpressResponseBlock)responseWithString:(NSString*)string {
     return [self responseWithString:string encoding:NSUTF8StringEncoding];

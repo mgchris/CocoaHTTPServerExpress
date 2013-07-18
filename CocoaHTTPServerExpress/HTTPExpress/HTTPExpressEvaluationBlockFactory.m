@@ -1,15 +1,14 @@
 //
-//  HTTPExpressManager+HTTPExpressEvaluationBlocks.m
+//  HTTPExpressEvaluationBlockFactory.m
 //  CocoaHTTPServerExpress
 //
-//  Created by chrise26 on 7/1/13.
-//  Copyright (c) 2013 mgchris. All rights reserved.
+//  Created by Christopher Evans on 7/17/13.
+//  Copyright (c) 2013 Christopher Evans. All rights reserved.
 //
 
-#import "HTTPExpressManager+HTTPExpressEvaluationBlocks.h"
-#import "HTTPMessage.h"
+#import "HTTPExpressEvaluationBlockFactory.h"
 
-@implementation HTTPExpressManager (HTTPExpressEvaluationBlocks)
+@implementation HTTPExpressEvaluationBlockFactory
 
 + (HTTPExpressEvaluateBlock)evaluateUrlMatch:(NSURL*)url {
     NSURL* blockUrl = [url copy];
@@ -35,5 +34,6 @@
     };
     return block;
 }
+
 
 @end

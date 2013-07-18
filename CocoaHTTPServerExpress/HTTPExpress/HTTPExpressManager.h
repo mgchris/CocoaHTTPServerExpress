@@ -2,27 +2,16 @@
 //  HTTPExpressReponseManager.h
 //  CocoaHTTPServerForTesting
 //
-//  Created by chrise26 on 6/26/13.
-//  Copyright (c) 2013 chrise26. All rights reserved.
+//  Created by Christopher Evans on 6/26/13.
+//  Copyright (c) 2013 Christopher Evans. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 
+#import "HTTPExpressContant.h"
+
 @class HTTPExpressReponseManager;
-@class HTTPMessage;
 @class HTTPServer;
-@protocol HTTPResponse;
-
-/**
- Should evaluate the message to see if connected response should fire
- */
-typedef BOOL(^HTTPExpressEvaluateBlock)(HTTPMessage *message);
-
-/**
- Return an object 
- */
-typedef NSObject<HTTPResponse>*(^HTTPExpressResponseBlock)(HTTPMessage *request);
-
 
 
 #pragma mark -

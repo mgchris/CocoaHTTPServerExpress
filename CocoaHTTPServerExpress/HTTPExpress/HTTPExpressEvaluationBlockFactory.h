@@ -1,14 +1,17 @@
 //
-//  HTTPExpressManager+HTTPExpressEvaluationBlocks.h
+//  HTTPExpressEvaluationBlockFactory.h
 //  CocoaHTTPServerExpress
 //
-//  Created by chrise26 on 7/1/13.
-//  Copyright (c) 2013 mgchris. All rights reserved.
+//  Created by Christopher Evans on 7/17/13.
+//  Copyright (c) 2013 Christopher Evans. All rights reserved.
 //
 
-#import "HTTPExpressManager.h"
+#import <Foundation/Foundation.h>
+#import "HTTPExpressContant.h"
 
-@interface HTTPExpressManager (HTTPExpressEvaluationBlocks)
+
+#pragma mark -
+@interface HTTPExpressEvaluationBlockFactory : NSObject
 
 /**
  Will return YES if URL match
@@ -19,5 +22,6 @@
  Will return YES if URL and request method Match
  */
 + (HTTPExpressEvaluateBlock)evaluateUrlMatch:(NSURL*)url withMethod:(NSString*)method;
+
 
 @end

@@ -16,107 +16,100 @@ describe(@"HTTPExpressConnectionSpec", ^{
     context(@"use", ^{
         
         it(@"New Manager", ^{
-            HTTPExpressManager* manager = [HTTPExpressManager defaultManager];
+            HTTPExpressManager* manager = HEM;
             
             [manager shouldNotBeNil];
             [manager.httpServer shouldNotBeNil];
             [[manager.httpServer.connectionClass should] equal:[HTTPExpressConnection class]];
-            [[manager should] equal:[HTTPExpressManager defaultManager]];
+            [[manager should] equal:HEM];
         });
         
         it(@"Create unique key", ^{
-            NSString* key1 = [[HTTPExpressManager defaultManager] generateKey];
-            NSString* key2 = [[HTTPExpressManager defaultManager] generateKey];
+            NSString* key1 = [HEM generateKey];
+            NSString* key2 = [HEM generateKey];
             
             [[key1 shouldNot] equal:key2];
         });
     
         it(@"correct host", ^{
-            NSString* host = [NSString stringWithFormat:@"http://127.0.0.1:%d", [HTTPExpressManager defaultManager].httpServer.listeningPort];
-            [[host should] equal:[[HTTPExpressManager defaultManager] urlStringForHost]];
+            NSString* host = [NSString stringWithFormat:@"http://127.0.0.1:%d", HEM.httpServer.listeningPort];
+            [[host should] equal:[HEM urlStringForHost]];
         });
         
         it(@"Build path", ^{
-            NSString* host = [NSString stringWithFormat:@"http://127.0.0.1:%d/helloWorld", [HTTPExpressManager defaultManager].httpServer.listeningPort];
-            [[host should] equal:[[HTTPExpressManager defaultManager] urlWithPath:@"/helloWorld"].absoluteString];
+            NSString* host = [NSString stringWithFormat:@"http://127.0.0.1:%d/helloWorld", HEM.httpServer.listeningPort];
+            [[host should] equal:[HEM urlWithPath:@"/helloWorld"].absoluteString];
         });
         
         context(@"managing express blocks", ^{
             it(@"Add and remove block", ^{
                 
-                [[theValue([[[HTTPExpressManager defaultManager] responseBlocks] count]) should] equal:theValue(0)];
+                [[theValue([[HEM responseBlocks] count]) should] equal:theValue(0)];
                 
-                NSString* key = [[HTTPExpressManager defaultManager] connectEvaluateBlock:[HTTPExpressManager evaluateUrlMatch:[NSURL URLWithString:@"/url"]]
-                                                                        withResponseBlock:[HTTPExpressManager responseWithString:@"response"]];
+                NSString* key = [HEM connectEvaluateBlock:HEBEvalString(@"/url")
+                                        withResponseBlock:HEBResponse(@"response")];
                 [key shouldNotBeNil];
-                [[theValue([[[HTTPExpressManager defaultManager] responseBlocks] count]) should] equal:theValue(1)];
+                [[theValue([[HEM responseBlocks] count]) should] equal:theValue(1)];
                 
-                [[HTTPExpressManager defaultManager] removeBlocksForKey:key];
-                [[theValue([[[HTTPExpressManager defaultManager] responseBlocks] count]) should] equal:theValue(0)];
+                [HEM removeBlocksForKey:key];
+                [[theValue([[HEM responseBlocks] count]) should] equal:theValue(0)];
             });
             
             it(@"remove all blocks", ^{
-                [[theValue([[[HTTPExpressManager defaultManager] responseBlocks] count]) should] equal:theValue(0)];
+                [[theValue([[HEM responseBlocks] count]) should] equal:theValue(0)];
                 
-                [[HTTPExpressManager defaultManager] connectEvaluateBlock:[HTTPExpressManager evaluateUrlMatch:[NSURL URLWithString:@"/url"]]
-                                                        withResponseBlock:[HTTPExpressManager responseWithString:@"response"]];
-                [[HTTPExpressManager defaultManager] connectEvaluateBlock:[HTTPExpressManager evaluateUrlMatch:[NSURL URLWithString:@"/url"]]
-                                                        withResponseBlock:[HTTPExpressManager responseWithString:@"response"]];
-                [[HTTPExpressManager defaultManager] connectEvaluateBlock:[HTTPExpressManager evaluateUrlMatch:[NSURL URLWithString:@"/url"]]
-                                                        withResponseBlock:[HTTPExpressManager responseWithString:@"response"]];
+                [HEM connectEvaluateBlock:HEBEvalString(@"/url") withResponseBlock:HEBResponse(@"response")];
+                [HEM connectEvaluateBlock:HEBEvalString(@"/url") withResponseBlock:HEBResponse(@"response")];
+                [HEM connectEvaluateBlock:HEBEvalString(@"/url") withResponseBlock:HEBResponse(@"response")];
                 
-                [[theValue([[[HTTPExpressManager defaultManager] responseBlocks] count]) should] equal:theValue(3)];
+                [[theValue([[HEM responseBlocks] count]) should] equal:theValue(3)];
                 
-                [[HTTPExpressManager defaultManager] removeAllExpressBlocks];
-                [[theValue([[[HTTPExpressManager defaultManager] responseBlocks] count]) should] equal:theValue(0)];
+                [HEM removeAllExpressBlocks];
+                [[theValue([[HEM responseBlocks] count]) should] equal:theValue(0)];
             });
             
             it(@"remove only block with key", ^{
-                [[theValue([[[HTTPExpressManager defaultManager] responseBlocks] count]) should] equal:theValue(0)];
+                [[theValue([[HEM responseBlocks] count]) should] equal:theValue(0)];
                 NSString* keepResponse = @"Keep Response";
-                NSURL* keepURL = [[HTTPExpressManager defaultManager] urlWithPath:@"/keep"];
+                NSURL* keepURL = [HEM urlWithPath:@"/keep"];
                 
-                NSString* key = [[HTTPExpressManager defaultManager] connectEvaluateBlock:[HTTPExpressManager evaluateUrlMatch:[NSURL URLWithString:@"/url"]]
-                                                                        withResponseBlock:[HTTPExpressManager responseWithString:@"response"]];
-                [[HTTPExpressManager defaultManager] connectEvaluateBlock:[HTTPExpressManager evaluateUrlMatch:keepURL]
-                                                        withResponseBlock:[HTTPExpressManager responseWithString:keepResponse]];
+                NSString* key = [HEM connectEvaluateBlock:HEBEvalString(@"/url") withResponseBlock:HEBResponse(@"response")];
+                [HEM connectEvaluateBlock:HEBEvalUrl(keepURL) withResponseBlock:HEBResponse(keepResponse)];
                 
-                [[theValue([[[HTTPExpressManager defaultManager] responseBlocks] count]) should] equal:theValue(2)];
-                [[HTTPExpressManager defaultManager] removeBlocksForKey:key];
-                [[theValue([[[HTTPExpressManager defaultManager] responseBlocks] count]) should] equal:theValue(1)];
+                [[theValue([[HEM responseBlocks] count]) should] equal:theValue(2)];
+                [HEM removeBlocksForKey:key];
+                [[theValue([[HEM responseBlocks] count]) should] equal:theValue(1)];
                 
                 NSString* content = [NSString stringWithContentsOfURL:keepURL
                                                              encoding:NSUTF8StringEncoding error:nil];
                 [[keepResponse shouldEventually] equal:content];
                 
-                [[HTTPExpressManager defaultManager] removeAllExpressBlocks];
+                [HEM removeAllExpressBlocks];
             });
         });
         
         it(@"returns string", ^{
-            __block NSURL* url = [[HTTPExpressManager defaultManager] urlWithPath:@"/helloWord"];
+            __block NSURL* url = [HEM urlWithPath:@"/helloWord"];
             __block NSString* responseString = @"You are so predictable!";
-            NSString* key = [[HTTPExpressManager defaultManager] connectEvaluateBlock:[HTTPExpressManager evaluateUrlMatch:url]
-                                                                    withResponseBlock:[HTTPExpressManager responseWithString:responseString]];
+            NSString* key = [HEM connectEvaluateBlock:HEBEvalUrl(url) withResponseBlock:HEBResponse(responseString)];
             
             NSString* content = [NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:nil];
             [[responseString shouldEventually] equal:content];
             
-            [[HTTPExpressManager defaultManager] removeBlocksForKey:key];
+            [HEM removeBlocksForKey:key];
         });
         
         it(@"return data", ^{
-            __block NSURL* url = [[HTTPExpressManager defaultManager] urlWithPath:@"/video"];
-            __block NSString* filePath = [bundle pathForResource:@"video20" ofType:@"m4v"];
-            NSString* key = [[HTTPExpressManager defaultManager] connectEvaluateBlock:[HTTPExpressManager evaluateUrlMatch:url]
-                                                                    withResponseBlock:[HTTPExpressManager responseWithFilePath:filePath]];
+            __block NSURL* url = [HEM urlWithPath:@"/dataFile"];
+            __block NSString* filePath = [bundle pathForResource:@"TestData" ofType:@"plist"];
+            NSString* key = [HEM connectEvaluateBlock:HEBEvalUrl(url) withResponseBlock:HEBResponseFile(filePath)];
             
             NSData* data = [NSData dataWithContentsOfFile:filePath];
             NSData* content = [NSData dataWithContentsOfURL:url];       // hits the server
             
             [[data shouldEventually] equal:content];
             
-            [[HTTPExpressManager defaultManager] removeBlocksForKey:key];
+            [HEM removeBlocksForKey:key];
         });
     });
 });

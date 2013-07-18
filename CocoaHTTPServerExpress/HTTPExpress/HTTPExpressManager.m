@@ -2,14 +2,11 @@
 //  HTTPExpressReponseManager.m
 //  CocoaHTTPServerForTesting
 //
-//  Created by chrise26 on 6/26/13.
-//  Copyright (c) 2013 chrise26. All rights reserved.
+//  Created by Christopher Evans on 6/26/13.
+//  Copyright (c) 2013 Christopher Evans. All rights reserved.
 //
 
 #import "HTTPExpressManager.h"
-
-#import "HTTPMessage.h"
-#import "HTTPResponse.h"
 
 #import "HTTPMessage.h"
 #import "HTTPDataResponse.h"
@@ -17,6 +14,9 @@
 
 #import "HTTPServer.h"
 #import "HTTPExpressConnection.h"
+
+#import "HTTPExpressEvaluationBlockFactory.h"
+
 
 static HTTPExpressManager * httpExpressManagerDefaultManagerInstance = nil;
 static NSString * const kHTTPExpressManagerDictionaryKeyResponse = @"response";
