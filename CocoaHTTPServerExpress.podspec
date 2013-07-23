@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name           = 'CocoaHTTPServerExpress'
-  s.version        = '0.0.1'
+  s.version        = '0.0.2'
   s.license        = 'BSD'
   s.summary        = 'Embeddable HTTP server that make testing easier.'
   s.homepage       = 'https://github.com/mgchris/CocoaHTTPServerExpress'
