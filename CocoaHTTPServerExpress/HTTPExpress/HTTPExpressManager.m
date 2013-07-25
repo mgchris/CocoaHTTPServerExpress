@@ -97,8 +97,8 @@ static NSString * const kHTTPExpressManagerDictionaryKeyEvaluate = @"evaluate";
     [self.responseBlocks removeAllObjects];
 }
 
-- (NSObject<HTTPResponse>*)responseForMessage:(HTTPMessage*)message {
-    NSObject<HTTPResponse>* httpResponse = nil;
+- (HTTPExpressResponse*)responseForMessage:(HTTPMessage*)message {
+    HTTPExpressResponse* httpResponse = nil;
     NSArray* allValues = self.responseBlocks.allValues;
     for(NSDictionary* dict in allValues) {
         HTTPExpressEvaluateBlock evaluate = [dict objectForKey:kHTTPExpressManagerDictionaryKeyEvaluate];

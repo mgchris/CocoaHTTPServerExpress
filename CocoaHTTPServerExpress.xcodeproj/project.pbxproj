@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		547C5C2C1784CD1200B6A1E0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54A9976B1784CA9A00A60BF7 /* CoreGraphics.framework */; };
+		54A05C4117A042B400CB800B /* HTTPExpressResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 54A05C4017A042B400CB800B /* HTTPExpressResponse.m */; };
+		54A05C4217A042B400CB800B /* HTTPExpressResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 54A05C4017A042B400CB800B /* HTTPExpressResponse.m */; };
 		54A997681784CA9A00A60BF7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54A997671784CA9A00A60BF7 /* UIKit.framework */; };
 		54A9976A1784CA9A00A60BF7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54A997691784CA9A00A60BF7 /* Foundation.framework */; };
 		54A9976C1784CA9A00A60BF7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54A9976B1784CA9A00A60BF7 /* CoreGraphics.framework */; };
@@ -51,6 +53,8 @@
 
 /* Begin PBXFileReference section */
 		50586E65EE2645B086CB4880 /* Pods/Pods-CocoaHTTPServerExpressTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods/Pods-CocoaHTTPServerExpressTests.xcconfig"; sourceTree = SOURCE_ROOT; };
+		54A05C3F17A042B400CB800B /* HTTPExpressResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPExpressResponse.h; sourceTree = "<group>"; };
+		54A05C4017A042B400CB800B /* HTTPExpressResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPExpressResponse.m; sourceTree = "<group>"; };
 		54A997641784CA9A00A60BF7 /* CocoaHTTPServerExpress.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CocoaHTTPServerExpress.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		54A997671784CA9A00A60BF7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		54A997691784CA9A00A60BF7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -213,6 +217,8 @@
 				54DDE0DA1797217100E327CA /* HTTPExpressEvaluationBlockFactory.m */,
 				54DDE0DE1797244F00E327CA /* HTTPExpressResponseBlockFactory.h */,
 				54DDE0DF1797244F00E327CA /* HTTPExpressResponseBlockFactory.m */,
+				54A05C3F17A042B400CB800B /* HTTPExpressResponse.h */,
+				54A05C4017A042B400CB800B /* HTTPExpressResponse.m */,
 			);
 			name = HTTPExpress;
 			path = CocoaHTTPServerExpress/HTTPExpress;
@@ -400,6 +406,7 @@
 				54A997B31784CB4B00A60BF7 /* HTTPExpressManager.m in Sources */,
 				54DDE0DB1797217100E327CA /* HTTPExpressEvaluationBlockFactory.m in Sources */,
 				54DDE0E01797244F00E327CA /* HTTPExpressResponseBlockFactory.m in Sources */,
+				54A05C4117A042B400CB800B /* HTTPExpressResponse.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -414,6 +421,7 @@
 				54DDE0E11797244F00E327CA /* HTTPExpressResponseBlockFactory.m in Sources */,
 				54DDE0E517975C1400E327CA /* HTTPExpressEvaluationBlockFactorySpec.m in Sources */,
 				54DDE0E71797635E00E327CA /* HTTPExpressResponseBlockFactorySpec.m in Sources */,
+				54A05C4217A042B400CB800B /* HTTPExpressResponse.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

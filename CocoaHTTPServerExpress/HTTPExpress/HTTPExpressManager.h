@@ -69,7 +69,7 @@
 /**
  Who ever response to this method needs to return a response.  You may return nil
  */
-- (NSObject<HTTPResponse>*)responseForMessage:(HTTPMessage*)message;
+- (HTTPExpressResponse*)responseForMessage:(HTTPMessage*)message;
 @end
 
 

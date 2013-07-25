@@ -9,8 +9,53 @@
 #import "HTTPExpressConnection.h"
 #import "HTTPExpressManager.h"
 
+#import "HTTPLogging.h"
+#import "DDNumber.h"
+#import "DDRange.h"
+#import "DDData.h"
+#import "GCDAsyncSocket.h"
+
+// See HTTPConnection.m for more information
+#define kHTTPExpressConnection_TIMEOUT_WRITE_ERROR      30
+#define kHTTPExpressConnection_HTTP_RESPONSE            90
+#define kHTTPExpressConnection_HTTP_FINAL_RESPONSE      91
+
 @implementation HTTPExpressConnection
-- (NSObject<HTTPResponse> *)httpResponseForMethod:(NSString *)method URI:(NSString *)path {
-	return [[HTTPExpressManager defaultManager] responseForMessage:request];
+
+- (void)replyToHTTPRequest {
+    HTTPExpressResponse* response = [[HTTPExpressManager defaultManager] responseForMessage:request];
+    if ( response == nil ) {
+		[self handleNoResponse];
+	} else {
+        if( response.isResponse ) {
+            [self handleResponse:response];
+        } else if( response.isError ) {
+            [self handleErrorResponse:response];
+        }
+    }
 }
+
+-(void)handleNoResponse {
+    // See if the super needs to handle this.  Not sure if there is a better way to handle this.
+    [super performSelector:@selector(replyToHTTPRequest)];
+}
+
+- (void)handleResponse:(HTTPExpressResponse*)response {
+    // The super class has these methods.   Not sure if there is a better way to handle this.
+    if( response.isResponse && [super respondsToSelector:@selector(sendResponseHeadersAndBody)] ) {
+        httpResponse = response.responseObject;
+        [super performSelector:@selector(sendResponseHeadersAndBody)];
+    }
+}
+
+- (void)handleErrorResponse:(HTTPExpressResponse*)response {
+    if( response.isError ) {
+        NSData *responseData = [self preprocessErrorResponse:response.messageObject];
+        NSInteger tag = response.terminateConnection ? kHTTPExpressConnection_HTTP_FINAL_RESPONSE : kHTTPExpressConnection_HTTP_RESPONSE;
+        [asyncSocket writeData:responseData
+                   withTimeout:kHTTPExpressConnection_TIMEOUT_WRITE_ERROR
+                           tag:tag];
+    }
+}
+
 @end

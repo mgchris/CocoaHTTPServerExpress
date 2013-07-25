@@ -88,28 +88,65 @@ describe(@"HTTPExpressConnectionSpec", ^{
             });
         });
         
-        it(@"returns string", ^{
-            __block NSURL* url = [HEM urlWithPath:@"/helloWord"];
-            __block NSString* responseString = @"You are so predictable!";
-            NSString* key = [HEM connectEvaluateBlock:HEBEvalUrl(url) withResponseBlock:HEBResponse(responseString)];
+        context(@"Response", ^{
+            it(@"returns string", ^{
+                __block NSURL* url = [HEM urlWithPath:@"/helloWord"];
+                __block NSString* responseString = @"You are so predictable!";
+                NSString* key = [HEM connectEvaluateBlock:HEBEvalUrl(url) withResponseBlock:HEBResponse(responseString)];
+                
+                NSHTTPURLResponse* response = nil;
+                NSError* error = nil;
+                NSData* data = [NSURLConnection sendSynchronousRequest:[NSURLRequest requestWithURL:url]
+                                                        returningResponse:&response
+                                                                    error:&error];
+                NSString* content = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                [error shouldBeNil];
+                [[responseString shouldEventually] equal:content];
+                
+                [HEM removeBlocksForKey:key];
+            });
             
-            NSString* content = [NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:nil];
-            [[responseString shouldEventually] equal:content];
+            it(@"return data", ^{
+                __block NSURL* url = [HEM urlWithPath:@"/dataFile"];
+                __block NSString* filePath = [bundle pathForResource:@"TestData" ofType:@"plist"];
+                NSString* key = [HEM connectEvaluateBlock:HEBEvalUrl(url) withResponseBlock:HEBResponseFile(filePath)];
+                
+                NSData* data = [NSData dataWithContentsOfFile:filePath];
+                
+                NSHTTPURLResponse* response = nil;
+                NSError* error = nil;
+                NSData* content = [NSURLConnection sendSynchronousRequest:[NSURLRequest requestWithURL:url]
+                                                        returningResponse:&response
+                                                                    error:&error];
+                [error shouldBeNil];
+                [[data shouldEventually] equal:content];
+                
+                [HEM removeBlocksForKey:key];
+            });
             
-            [HEM removeBlocksForKey:key];
-        });
-        
-        it(@"return data", ^{
-            __block NSURL* url = [HEM urlWithPath:@"/dataFile"];
-            __block NSString* filePath = [bundle pathForResource:@"TestData" ofType:@"plist"];
-            NSString* key = [HEM connectEvaluateBlock:HEBEvalUrl(url) withResponseBlock:HEBResponseFile(filePath)];
-            
-            NSData* data = [NSData dataWithContentsOfFile:filePath];
-            NSData* content = [NSData dataWithContentsOfURL:url];       // hits the server
-            
-            [[data shouldEventually] equal:content];
-            
-            [HEM removeBlocksForKey:key];
+            context(@"Error", ^{
+                __block NSURLRequest* request = nil;
+                __block NSURL* url = nil;
+                
+                beforeAll(^{
+                    url = [HEM urlWithPath:@"/helloWord"];
+                    request = [NSURLRequest requestWithURL:url];
+                });
+                
+                it(@"returns string", ^{
+                    NSString* key = [HEM connectEvaluateBlock:HEBEvalUrl(url)
+                                            withResponseBlock:[HERBF responseWithErrorNotFound]];
+                    NSHTTPURLResponse* response = nil;
+                    NSError* error = nil;
+                    [NSURLConnection sendSynchronousRequest:request
+                                          returningResponse:&response
+                                                      error:&error];
+                    [error shouldBeNil];
+                    [[theValue(response.statusCode) should] equal:theValue(404)];
+                    
+                    [HEM removeBlocksForKey:key];
+                });
+            });
         });
     });
 });

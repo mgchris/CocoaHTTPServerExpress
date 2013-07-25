@@ -1,9 +1,5 @@
-#include "Pods-CocoaHTTPServerExpressTests-CocoaAsyncSocket.xcconfig"
-#include "Pods-CocoaHTTPServerExpressTests-CocoaHTTPServer.xcconfig"
-#include "Pods-CocoaHTTPServerExpressTests-CocoaLumberjack.xcconfig"
-#include "Pods-CocoaHTTPServerExpressTests-Kiwi.xcconfig"
-FRAMEWORK_SEARCH_PATHS =  ${PODS_COCOAHTTPSERVEREXPRESSTESTS_KIWI_FRAMEWORK_SEARCH_PATHS}
+FRAMEWORK_SEARCH_PATHS = $(inherited) "$(SDKROOT)/Developer/Library/Frameworks" "$(DEVELOPER_LIBRARY_DIR)/Frameworks"
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers" "${PODS_ROOT}/Headers/CocoaAsyncSocket" "${PODS_ROOT}/Headers/CocoaHTTPServer" "${PODS_ROOT}/Headers/CocoaLumberjack" "${PODS_ROOT}/Headers/Kiwi" ${PODS_COCOAHTTPSERVEREXPRESSTESTS_COCOAHTTPSERVER_HEADER_SEARCH_PATHS}
-OTHER_LDFLAGS = -ObjC ${PODS_COCOAHTTPSERVEREXPRESSTESTS_COCOAASYNCSOCKET_OTHER_LDFLAGS} ${PODS_COCOAHTTPSERVEREXPRESSTESTS_COCOAHTTPSERVER_OTHER_LDFLAGS} ${PODS_COCOAHTTPSERVEREXPRESSTESTS_KIWI_OTHER_LDFLAGS}
+HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers" "${PODS_ROOT}/Headers/CocoaAsyncSocket" "${PODS_ROOT}/Headers/CocoaHTTPServer" "${PODS_ROOT}/Headers/CocoaLumberjack" "${PODS_ROOT}/Headers/Kiwi" $(SDKROOT)/usr/include/libxml2
+OTHER_LDFLAGS = -ObjC -lxml2 -framework CFNetwork -framework Security -framework SenTestingKit
 PODS_ROOT = ${SRCROOT}/Pods

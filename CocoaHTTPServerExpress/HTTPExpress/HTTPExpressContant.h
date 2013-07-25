@@ -10,7 +10,7 @@
 #define CocoaHTTPServerExpress_HTTPExpressContant_h
 
 #import "HTTPMessage.h"
-#import "HTTPResponse.h"
+#import "HTTPExpressResponse.h"
 
 /**
  Should evaluate the message to see if connected response should fire
@@ -20,7 +20,7 @@ typedef BOOL(^HTTPExpressEvaluateBlock)(HTTPMessage *message);
 /**
  Return an object
  */
-typedef NSObject<HTTPResponse>*(^HTTPExpressResponseBlock)(HTTPMessage *request);
+typedef HTTPExpressResponse* (^HTTPExpressResponseBlock)(HTTPMessage *request);
 
 
 #endif

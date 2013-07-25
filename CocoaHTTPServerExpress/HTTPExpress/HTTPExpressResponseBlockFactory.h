@@ -28,4 +28,23 @@
 + (HTTPExpressResponseBlock)responseWithFilePath:(NSString*)filePath;
 
 
+#pragma mark - Server Errors
+/**
+ Returns an error response
+ @param statusCode the error for response
+ @param description additional message
+ @param version HTTP version
+ @param headFields header to be applied to the response
+ */
++ (HTTPExpressResponseBlock)responseWithErrorCode:(NSInteger)statusCode
+                                      description:(NSString*)description
+                                          version:(NSString*)version
+                                     headerFields:(NSDictionary*)header
+                              terminateConnection:(BOOL)terminate;
+
++ (HTTPExpressResponseBlock)responseWithErrorNotFound;
++ (HTTPExpressResponseBlock)responseWithErrorAuthenticationFailed;
++ (HTTPExpressResponseBlock)responseWithErrorBadRequest;
++ (HTTPExpressResponseBlock)responseWithErrorServerError;
+
 @end
