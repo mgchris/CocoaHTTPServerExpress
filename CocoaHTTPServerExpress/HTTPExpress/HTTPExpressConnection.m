@@ -25,7 +25,7 @@
 - (void)replyToHTTPRequest {
     HTTPExpressResponse* response = [[HTTPExpressManager defaultManager] responseForMessage:request];
     if ( response == nil ) {
-		[self handleNoResponse];
+		[self handleResourceNotFound];
 	} else {
         if( response.isResponse ) {
             [self handleResponse:response];
@@ -33,11 +33,6 @@
             [self handleErrorResponse:response];
         }
     }
-}
-
--(void)handleNoResponse {
-    // See if the super needs to handle this.  Not sure if there is a better way to handle this.
-    [super performSelector:@selector(replyToHTTPRequest)];
 }
 
 - (void)handleResponse:(HTTPExpressResponse*)response {
