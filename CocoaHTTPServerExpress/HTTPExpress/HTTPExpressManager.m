@@ -113,4 +113,28 @@ static NSString * const kHTTPExpressManagerDictionaryKeyEvaluate = @"evaluate";
     return httpResponse;
 }
 
+
+/**
+ * Returns whether or not the server will accept messages of a given method
+ * at a httpmessage.
+ **/
+- (BOOL)supportsMethod:(HTTPMessage*)message
+{
+    bool supportsMethod = false;
+
+    NSArray* allValues = self.responseBlocks.allValues;
+    for(NSDictionary* dict in allValues) {
+        HTTPExpressEvaluateBlock evaluate = [dict objectForKey:kHTTPExpressManagerDictionaryKeyEvaluate];
+        if( evaluate ) {
+            if( evaluate(message) ) {
+                supportsMethod = true;
+                break;
+            }
+        }
+    }
+
+    return supportsMethod;
+    
+}
+
 @end
