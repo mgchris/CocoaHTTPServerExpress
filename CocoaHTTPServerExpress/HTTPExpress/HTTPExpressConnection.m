@@ -25,7 +25,7 @@
 - (void)replyToHTTPRequest {
     HTTPExpressResponse* response = [[HTTPExpressManager defaultManager] responseForMessage:request];
     if ( response == nil ) {
-		[self handleNoResponse];
+		[self handleResourceNotFound];
 	} else {
         if( response.isResponse ) {
             [self handleResponse:response];
@@ -33,11 +33,6 @@
             [self handleErrorResponse:response];
         }
     }
-}
-
--(void)handleNoResponse {
-    // See if the super needs to handle this.  Not sure if there is a better way to handle this.
-    [super performSelector:@selector(replyToHTTPRequest)];
 }
 
 - (void)handleResponse:(HTTPExpressResponse*)response {
@@ -56,6 +51,18 @@
                    withTimeout:kHTTPExpressConnection_TIMEOUT_WRITE_ERROR
                            tag:tag];
     }
+}
+
+/**
+ * Returns whether or not the server will accept messages of a given method
+ * at a particular URI.
+ **/
+- (BOOL)supportsMethod:(NSString *)method atPath:(NSString *)path
+{
+
+    HTTPMessage * testMessage = [[HTTPMessage alloc] initRequestWithMethod:method URL:[[HTTPExpressManager defaultManager] urlWithPath:path] version:@""];
+
+	return [[HTTPExpressManager defaultManager] supportsMethod:testMessage];
 }
 
 @end

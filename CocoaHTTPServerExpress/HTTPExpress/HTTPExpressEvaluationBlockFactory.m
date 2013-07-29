@@ -14,7 +14,7 @@
     NSURL* blockUrl = [url copy];
     HTTPExpressEvaluateBlock block = ^BOOL(HTTPMessage *message) {
         BOOL fire = NO;
-        if( [[message.url absoluteURL] isEqual:blockUrl] ) {
+        if( [[message.url relativePath] isEqualToString:[blockUrl relativePath]] ) {
             fire = YES;
         }
         return fire;
@@ -27,7 +27,7 @@
     NSString* blockMethod = [method copy];
     HTTPExpressEvaluateBlock block = ^BOOL(HTTPMessage *message) {
         BOOL fire = NO;
-        if( [[message.url absoluteURL] isEqual:blockUrl] && [message.method isEqualToString:blockMethod] ) {
+        if( [[message.url relativePath] isEqualToString:[blockUrl relativePath]] && [message.method isEqualToString:blockMethod] ) {
             fire = YES;
         }
         return fire;
