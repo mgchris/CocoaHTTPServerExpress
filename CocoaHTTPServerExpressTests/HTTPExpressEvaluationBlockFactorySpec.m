@@ -30,8 +30,8 @@ describe(@"HTTPExpressEvaluationBlockFactorySpec", ^{
         });
         
         it(@"not matching url", ^{
-            NSURL* url = [NSURL URLWithString:@"http://fakeUrl.com"];
-            HTTPExpressEvaluateBlock block = HEBEvalString(@"http://badUrl.com");
+            NSURL* url = [NSURL URLWithString:@"http://fakeUrl.com/test"];
+            HTTPExpressEvaluateBlock block = HEBEvalString(@"http://fakeUrl.com/bob");
             HTTPMessage* mock = [HTTPMessage nullMock];
             [mock stub:@selector(url) andReturn:url];
             
@@ -54,7 +54,7 @@ describe(@"HTTPExpressEvaluationBlockFactorySpec", ^{
         it(@"not matching url", ^{
             NSURL* url = [NSURL URLWithString:@"http://fakeUrl.com"];
             
-            HTTPExpressEvaluateBlock block = HEBEvalMethodString(@"http://badUrl.com", @"GET");
+            HTTPExpressEvaluateBlock block = HEBEvalMethodString(@"http://fakeUrl.com/test", @"GET");
             HTTPMessage* mock = [HTTPMessage nullMock];
             [mock stub:@selector(url) andReturn:url];
             [mock stub:@selector(method) andReturn:@"GET"];
@@ -73,7 +73,7 @@ describe(@"HTTPExpressEvaluationBlockFactorySpec", ^{
         });
         
         it(@"not matching url or method", ^{
-            HTTPExpressEvaluateBlock block = HEBEvalMethodString(@"http://badUrl.com", @"GET");
+            HTTPExpressEvaluateBlock block = HEBEvalMethodString(@"http://fakeUrl.com/test", @"GET");
             
             HTTPMessage* mock = [HTTPMessage nullMock];
             [mock stub:@selector(url) andReturn:[NSURL URLWithString:@"http://fakeUrl.com"]];

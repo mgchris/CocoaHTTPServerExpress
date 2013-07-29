@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5438178B17A2B86B006875B0 /* HTTPExpressErrors.m in Sources */ = {isa = PBXBuildFile; fileRef = 5438178A17A2B86B006875B0 /* HTTPExpressErrors.m */; };
 		547C5C2C1784CD1200B6A1E0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54A9976B1784CA9A00A60BF7 /* CoreGraphics.framework */; };
 		54A05C4117A042B400CB800B /* HTTPExpressResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 54A05C4017A042B400CB800B /* HTTPExpressResponse.m */; };
 		54A05C4217A042B400CB800B /* HTTPExpressResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 54A05C4017A042B400CB800B /* HTTPExpressResponse.m */; };
@@ -53,6 +54,7 @@
 
 /* Begin PBXFileReference section */
 		50586E65EE2645B086CB4880 /* Pods/Pods-CocoaHTTPServerExpressTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods/Pods-CocoaHTTPServerExpressTests.xcconfig"; sourceTree = SOURCE_ROOT; };
+		5438178A17A2B86B006875B0 /* HTTPExpressErrors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPExpressErrors.m; sourceTree = "<group>"; };
 		54A05C3F17A042B400CB800B /* HTTPExpressResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPExpressResponse.h; sourceTree = "<group>"; };
 		54A05C4017A042B400CB800B /* HTTPExpressResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPExpressResponse.m; sourceTree = "<group>"; };
 		54A997641784CA9A00A60BF7 /* CocoaHTTPServerExpress.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CocoaHTTPServerExpress.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -189,6 +191,7 @@
 				54A997B51784CB8600A60BF7 /* HTTPExpressConnectionSpec.m */,
 				54DDE0E417975C1400E327CA /* HTTPExpressEvaluationBlockFactorySpec.m */,
 				54DDE0E61797635E00E327CA /* HTTPExpressResponseBlockFactorySpec.m */,
+				5438178A17A2B86B006875B0 /* HTTPExpressErrors.m */,
 				54A997921784CA9A00A60BF7 /* Supporting Files */,
 			);
 			path = CocoaHTTPServerExpressTests;
@@ -422,6 +425,7 @@
 				54DDE0E517975C1400E327CA /* HTTPExpressEvaluationBlockFactorySpec.m in Sources */,
 				54DDE0E71797635E00E327CA /* HTTPExpressResponseBlockFactorySpec.m in Sources */,
 				54A05C4217A042B400CB800B /* HTTPExpressResponse.m in Sources */,
+				5438178B17A2B86B006875B0 /* HTTPExpressErrors.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
