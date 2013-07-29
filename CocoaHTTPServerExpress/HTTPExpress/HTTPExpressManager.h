@@ -70,6 +70,12 @@
  Who ever response to this method needs to return a response.  You may return nil
  */
 - (HTTPExpressResponse*)responseForMessage:(HTTPMessage*)message;
+
+/**
+ Check to see if we support the method for the message
+ */
+- (BOOL)supportsMethod:(HTTPMessage*)message;
+
 @end
 
 

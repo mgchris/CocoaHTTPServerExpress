@@ -53,4 +53,16 @@
     }
 }
 
+/**
+ * Returns whether or not the server will accept messages of a given method
+ * at a particular URI.
+ **/
+- (BOOL)supportsMethod:(NSString *)method atPath:(NSString *)path
+{
+
+    HTTPMessage * testMessage = [[HTTPMessage alloc] initRequestWithMethod:method URL:[[HTTPExpressManager defaultManager] urlWithPath:path] version:@""];
+
+	return [[HTTPExpressManager defaultManager] supportsMethod:testMessage];
+}
+
 @end
