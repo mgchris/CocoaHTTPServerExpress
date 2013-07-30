@@ -65,4 +65,23 @@
 	return [[HTTPExpressManager defaultManager] supportsMethod:testMessage];
 }
 
+/**
+ * This method is called to handle data read from a POST / PUT.
+ * The given data is part of the request body.
+ **/
+- (void)processBodyData:(NSData *)postDataChunk
+{
+	request.body = postDataChunk;
+}
+
+/**
+ * This method is called after the request body has been fully read but before the HTTP request is processed.
+ **/
+- (void)finishBody
+{
+	// Override me to perform any final operations on an upload.
+	// For example, if you were saving the upload to disk this would be
+	// the hook to flush any pending data to disk and maybe close the file.
+}
+
 @end
