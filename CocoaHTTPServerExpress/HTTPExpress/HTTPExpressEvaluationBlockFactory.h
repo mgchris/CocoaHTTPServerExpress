@@ -23,5 +23,10 @@
  */
 + (HTTPExpressEvaluateBlock)evaluateUrlMatch:(NSURL*)url withMethod:(NSString*)method;
 
+/**
+ Will return YES if the URL is and the body are the same.
+ @note Right now if you pass in nil for body it will return YES.  Still trying to think of a better way
+ */
++ (HTTPExpressEvaluateBlock)evaluateUrlMatch:(NSURL*)url requestBody:(NSData*)body;
 
 @end

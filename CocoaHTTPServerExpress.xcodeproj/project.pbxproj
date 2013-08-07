@@ -38,6 +38,7 @@
 		54DDE0E317972E1800E327CA /* TestData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 54DDE0E217972E1800E327CA /* TestData.plist */; };
 		54DDE0E517975C1400E327CA /* HTTPExpressEvaluationBlockFactorySpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 54DDE0E417975C1400E327CA /* HTTPExpressEvaluationBlockFactorySpec.m */; };
 		54DDE0E71797635E00E327CA /* HTTPExpressResponseBlockFactorySpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 54DDE0E61797635E00E327CA /* HTTPExpressResponseBlockFactorySpec.m */; };
+		54E305AF17B1BA8B00101365 /* HTTPExpressIntegrationSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 54E305AE17B1BA8B00101365 /* HTTPExpressIntegrationSpec.m */; };
 		67648F32FA73455A9B8E7FCA /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E3CA9A64F05435196826B1D /* libPods.a */; };
 		B30434147EB54529B3C87484 /* libPods-CocoaHTTPServerExpressTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E7A1F9461BDE437692548512 /* libPods-CocoaHTTPServerExpressTests.a */; };
 /* End PBXBuildFile section */
@@ -91,6 +92,7 @@
 		54DDE0E217972E1800E327CA /* TestData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TestData.plist; sourceTree = "<group>"; };
 		54DDE0E417975C1400E327CA /* HTTPExpressEvaluationBlockFactorySpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPExpressEvaluationBlockFactorySpec.m; sourceTree = "<group>"; };
 		54DDE0E61797635E00E327CA /* HTTPExpressResponseBlockFactorySpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPExpressResponseBlockFactorySpec.m; sourceTree = "<group>"; };
+		54E305AE17B1BA8B00101365 /* HTTPExpressIntegrationSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPExpressIntegrationSpec.m; sourceTree = "<group>"; };
 		7E3CA9A64F05435196826B1D /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7A1F9461BDE437692548512 /* libPods-CocoaHTTPServerExpressTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CocoaHTTPServerExpressTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7A3BAA02D564CCA956748DA /* Pods/Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
@@ -192,6 +194,7 @@
 				54DDE0E417975C1400E327CA /* HTTPExpressEvaluationBlockFactorySpec.m */,
 				54DDE0E61797635E00E327CA /* HTTPExpressResponseBlockFactorySpec.m */,
 				5438178A17A2B86B006875B0 /* HTTPExpressErrors.m */,
+				54E305AE17B1BA8B00101365 /* HTTPExpressIntegrationSpec.m */,
 				54A997921784CA9A00A60BF7 /* Supporting Files */,
 			);
 			path = CocoaHTTPServerExpressTests;
@@ -426,6 +429,7 @@
 				54DDE0E71797635E00E327CA /* HTTPExpressResponseBlockFactorySpec.m in Sources */,
 				54A05C4217A042B400CB800B /* HTTPExpressResponse.m in Sources */,
 				5438178B17A2B86B006875B0 /* HTTPExpressErrors.m in Sources */,
+				54E305AF17B1BA8B00101365 /* HTTPExpressIntegrationSpec.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
