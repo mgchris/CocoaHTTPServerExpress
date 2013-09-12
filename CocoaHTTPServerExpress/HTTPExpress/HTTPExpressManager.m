@@ -39,7 +39,11 @@ static NSString * const kHTTPExpressManagerDictionaryKeyEvaluate = @"evaluate";
         [server setType:@"_http._tcp."];
         [server setConnectionClass:[HTTPExpressConnection class]];
         
-        NSAssert([server start:nil] == YES, @"Failed to create server!");
+        NSError* error = nil;
+        if( [server start:&error] == NO ) {
+            NSLog(@"Starting Server Error: %@", error);
+        }
+        
         httpExpressManagerDefaultManagerInstance.httpServer = server;
     });
     
