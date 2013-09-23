@@ -19,34 +19,32 @@
 
 
 static HTTPExpressManager * httpExpressManagerDefaultManagerInstance = nil;
-static NSString * const kHTTPExpressManagerDictionaryKeyResponse = @"response";
-static NSString * const kHTTPExpressManagerDictionaryKeyEvaluate = @"evaluate";
 
-@interface HTTPExpressManager ()
-@property (nonatomic, strong) NSMutableDictionary* responseBlocks;
+/**
+ The configurationBlocks key for all blocks.
+ */
+static NSString * const kHTTPExpressManagerConfigurationDictionaryKeyBlocks = @"block";
+
+/**
+ Key used to reference a eval and response block
+ */
+static NSString * const kHTTPExpressManagerConfigurationDictionaryKeyReference = @"key";
+
+
+@interface HTTPExpressManager () {
+    NSMutableDictionary* _configurationBlocks;
+}
+
 @end
 
 
 @implementation HTTPExpressManager
 
 + (HTTPExpressManager*)defaultManager {
-    
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         httpExpressManagerDefaultManagerInstance = [[HTTPExpressManager alloc] init];
-        
-        HTTPServer* server = [[HTTPServer alloc] init];
-        [server setType:@"_http._tcp."];
-        [server setConnectionClass:[HTTPExpressConnection class]];
-        
-        NSError* error = nil;
-        if( [server start:&error] == NO ) {
-            NSLog(@"Starting Server Error: %@", error);
-        }
-        
-        httpExpressManagerDefaultManagerInstance.httpServer = server;
     });
-    
     return httpExpressManagerDefaultManagerInstance;
 }
 
@@ -55,7 +53,18 @@ static NSString * const kHTTPExpressManagerDictionaryKeyEvaluate = @"evaluate";
 - (id)init {
     self = [super init];
     if( self ) {
-        _responseBlocks = [[NSMutableDictionary alloc] init];
+        _configurationBlocks = [[NSMutableDictionary alloc] init];
+        
+        HTTPServer* server = [[HTTPServer alloc] init];
+        [server setType:@"_http._tcp."];
+        [server setConnectionClass:[HTTPExpressConnection class]];
+        _httpServer = server;
+        _activeConfiguration = kHTTPExpressManagerDefaultConfigurationKey;
+        NSError* error = nil;
+        if( [server start:&error] == NO ) {
+            NSLog(@"Starting Server Error: %@", error);
+            self = nil;
+        }
     }
     return self;
 }
@@ -81,36 +90,107 @@ static NSString * const kHTTPExpressManagerDictionaryKeyEvaluate = @"evaluate";
 
 #pragma mark -
 - (NSString*)connectEvaluateBlock:(HTTPExpressEvaluateBlock)evaluate withResponseBlock:(HTTPExpressResponseBlock)response {
+    return [self connectEvaluateBlock:evaluate
+                    withResponseBlock:response
+                     forConfiguration:self.activeConfiguration];
+}
+
+- (NSString*)connectEvaluateBlock:(HTTPExpressEvaluateBlock)evaluate
+                withResponseBlock:(HTTPExpressResponseBlock)response
+                 forConfiguration:(NSString*)configuration {
     NSString* key = nil;
     if( evaluate  && response ) {
         key = [self generateKey];
-        NSDictionary* dict = @{kHTTPExpressManagerDictionaryKeyEvaluate:evaluate, kHTTPExpressManagerDictionaryKeyResponse:response};
-        [self.responseBlocks setObject:dict forKey:key];
+        NSDictionary* dict = @{kHTTPExpressManagerDictionaryKeyEvaluate:evaluate,
+                               kHTTPExpressManagerDictionaryKeyResponse:response,
+                               kHTTPExpressManagerConfigurationDictionaryKeyReference:key};
+        
+        NSMutableDictionary* configDict = _configurationBlocks[configuration];
+        if( configDict ) {
+            // configuration already found for block.  Just add block to array of blocks.
+            NSMutableArray* array = configDict[kHTTPExpressManagerConfigurationDictionaryKeyBlocks];
+            [array addObject:dict];
+        } else {
+            // Don't have a configuration for this key create a new one
+            NSMutableDictionary* configurationDict = [[NSMutableDictionary alloc] init];
+            configurationDict[kHTTPExpressManagerConfigurationDictionaryKeyBlocks] = [NSMutableArray arrayWithObject:dict];
+            _configurationBlocks[configuration] = configurationDict;
+        }
     }
     return key;
 }
 
+- (NSDictionary*)blocksForKey:(NSString*)key {
+    NSArray* configKeys = _configurationBlocks.allKeys;
+    NSMutableDictionary* dict = nil;
+    
+    for(NSString* config in configKeys) {
+        NSMutableArray* blocks = _configurationBlocks[config][kHTTPExpressManagerConfigurationDictionaryKeyBlocks];
+        for (NSMutableDictionary* blockDict in blocks) {
+            if( blockDict[kHTTPExpressManagerConfigurationDictionaryKeyReference] ) {
+                dict = [NSMutableDictionary dictionaryWithDictionary:blockDict];
+                [dict setObject:config forKey:kHTTPExpressManagerDictionaryKeyConfiguration];
+                break;
+            }
+        }
+        if( dict ) {
+            break;
+        }
+    }
+    
+    return dict;
+}
+
+- (NSArray*)allBlocksForConfiguration:(NSString*)config {
+    NSMutableDictionary* configuration = _configurationBlocks[config];
+    return configuration[kHTTPExpressManagerConfigurationDictionaryKeyBlocks];
+}
+
+- (void)removeBlocksForConfiguration:(NSString*)config {
+    if( _configurationBlocks[config] ) {
+        [_configurationBlocks removeObjectForKey:config];
+    }
+}
+
 - (void)removeBlocksForKey:(NSString*)key {
-    NSDictionary* dict = [self.responseBlocks objectForKey:key];
-    if( dict ) {
-        [self.responseBlocks removeObjectForKey:key];
+    NSArray* configKeys = _configurationBlocks.allKeys;
+    BOOL found = NO;
+    
+    for(NSString* config in configKeys) {
+        NSMutableArray* blocks = _configurationBlocks[config][kHTTPExpressManagerConfigurationDictionaryKeyBlocks];
+        for (NSMutableDictionary* blockDict in blocks) {
+            if( blockDict[kHTTPExpressManagerConfigurationDictionaryKeyReference] ) {
+                found = YES;
+                [blocks removeObject:blockDict];
+                if( blocks.count == 0 ) {
+                    [_configurationBlocks removeObjectForKey:config];
+                }
+                break;
+            }
+        }
+        
+        if( found ) {
+            break;
+        }
     }
 }
 
 - (void)removeAllExpressBlocks {
-    [self.responseBlocks removeAllObjects];
+    [_configurationBlocks removeAllObjects];
 }
 
 - (HTTPExpressResponse*)responseForMessage:(HTTPMessage*)message {
     HTTPExpressResponse* httpResponse = nil;
-    NSArray* allValues = self.responseBlocks.allValues;
-    for(NSDictionary* dict in allValues) {
-        HTTPExpressEvaluateBlock evaluate = [dict objectForKey:kHTTPExpressManagerDictionaryKeyEvaluate];
-        HTTPExpressResponseBlock response = [dict objectForKey:kHTTPExpressManagerDictionaryKeyResponse];
-        if( evaluate && response ) {
-            if( evaluate(message) ) {
-                httpResponse = response(message);
-                break;
+    if( self.activeConfiguration != nil ) {
+        NSArray* allBlocks = _configurationBlocks[self.activeConfiguration][kHTTPExpressManagerConfigurationDictionaryKeyBlocks];
+        for(NSDictionary* dict in allBlocks) {
+            HTTPExpressEvaluateBlock evaluate = [dict objectForKey:kHTTPExpressManagerDictionaryKeyEvaluate];
+            HTTPExpressResponseBlock response = [dict objectForKey:kHTTPExpressManagerDictionaryKeyResponse];
+            if( evaluate && response ) {
+                if( evaluate(message) ) {
+                    httpResponse = response(message);
+                    break;
+                }
             }
         }
     }
@@ -126,13 +206,15 @@ static NSString * const kHTTPExpressManagerDictionaryKeyEvaluate = @"evaluate";
 {
     bool supportsMethod = false;
 
-    NSArray* allValues = self.responseBlocks.allValues;
-    for(NSDictionary* dict in allValues) {
-        HTTPExpressEvaluateBlock evaluate = [dict objectForKey:kHTTPExpressManagerDictionaryKeyEvaluate];
-        if( evaluate ) {
-            if( evaluate(message) ) {
-                supportsMethod = true;
-                break;
+    if( self.activeConfiguration != nil ) {
+        NSArray* allValues = _configurationBlocks[self.activeConfiguration][kHTTPExpressManagerConfigurationDictionaryKeyBlocks];
+        for(NSDictionary* dict in allValues) {
+            HTTPExpressEvaluateBlock evaluate = [dict objectForKey:kHTTPExpressManagerDictionaryKeyEvaluate];
+            if( evaluate ) {
+                if( evaluate(message) ) {
+                    supportsMethod = true;
+                    break;
+                }
             }
         }
     }

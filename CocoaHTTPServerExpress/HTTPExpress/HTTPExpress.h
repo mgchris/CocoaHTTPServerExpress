@@ -16,10 +16,9 @@
 
 
 #pragma mark - Reduce typing Helpers
-/**
- Trying to 
+/*
+ Want to reduce the amount of type that is required to do common tasks.  Don't know if this helps or not. CLE 09/19/2013
  */
-
 #define HEM [HTTPExpressManager defaultManager]
 #define HEEBF HTTPExpressEvaluationBlockFactory
 #define HERBF HTTPExpressResponseBlockFactory

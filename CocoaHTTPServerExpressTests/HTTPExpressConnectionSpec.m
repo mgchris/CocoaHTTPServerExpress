@@ -22,6 +22,7 @@ describe(@"HTTPExpressConnectionSpec", ^{
             [manager.httpServer shouldNotBeNil];
             [[manager.httpServer.connectionClass should] equal:[HTTPExpressConnection class]];
             [[manager should] equal:HEM];
+            [[manager.activeConfiguration should] equal:kHTTPExpressManagerDefaultConfigurationKey];
         });
         
         it(@"Create unique key", ^{
@@ -44,41 +45,64 @@ describe(@"HTTPExpressConnectionSpec", ^{
         context(@"managing express blocks", ^{
             it(@"Add and remove block", ^{
                 
-                [[theValue([[HEM responseBlocks] count]) should] equal:theValue(0)];
+                HTTPExpressEvaluateBlock eval = HEBEvalString(@"/url");
+                HTTPExpressResponseBlock response = HEBResponse(@"response");
                 
-                NSString* key = [HEM connectEvaluateBlock:HEBEvalString(@"/url")
-                                        withResponseBlock:HEBResponse(@"response")];
+                NSString* key = [HEM connectEvaluateBlock:eval
+                                        withResponseBlock:response];
                 [key shouldNotBeNil];
-                [[theValue([[HEM responseBlocks] count]) should] equal:theValue(1)];
+                NSDictionary* blocks = [HEM blocksForKey:key];
+                
+                [blocks shouldNotBeNil];
+                [[[blocks objectForKey:kHTTPExpressManagerDictionaryKeyEvaluate] should] equal:eval];
+                [[[blocks objectForKey:kHTTPExpressManagerDictionaryKeyResponse] should] equal:response];
                 
                 [HEM removeBlocksForKey:key];
-                [[theValue([[HEM responseBlocks] count]) should] equal:theValue(0)];
+                [[HEM blocksForKey:key] shouldBeNil];
             });
             
-            it(@"remove all blocks", ^{
-                [[theValue([[HEM responseBlocks] count]) should] equal:theValue(0)];
+            it(@"blocks for default configuration", ^{
+                
+                [[HEM allBlocksForConfiguration:kHTTPExpressManagerDefaultConfigurationKey] shouldBeNil];
                 
                 [HEM connectEvaluateBlock:HEBEvalString(@"/url") withResponseBlock:HEBResponse(@"response")];
                 [HEM connectEvaluateBlock:HEBEvalString(@"/url") withResponseBlock:HEBResponse(@"response")];
                 [HEM connectEvaluateBlock:HEBEvalString(@"/url") withResponseBlock:HEBResponse(@"response")];
-                
-                [[theValue([[HEM responseBlocks] count]) should] equal:theValue(3)];
+            
+                [[theValue([HEM allBlocksForConfiguration:kHTTPExpressManagerDefaultConfigurationKey].count) should] equal:theValue(3)];
                 
                 [HEM removeAllExpressBlocks];
-                [[theValue([[HEM responseBlocks] count]) should] equal:theValue(0)];
+
+                [[HEM allBlocksForConfiguration:kHTTPExpressManagerDefaultConfigurationKey] shouldBeNil];
+            });
+            
+            
+            it(@"Add blocks with custom config", ^{
+                NSString* config = @"config";
+                HTTPExpressEvaluateBlock eval = HEBEvalString(@"/url");
+                HTTPExpressResponseBlock response = HEBResponse(@"response");
+                
+                [HEM connectEvaluateBlock:eval
+                        withResponseBlock:response
+                         forConfiguration:config];
+                
+                [[theValue([HEM allBlocksForConfiguration:config].count) should] equal:theValue(1)];
+                [HEM removeBlocksForConfiguration:config];
+                [[theValue([HEM allBlocksForConfiguration:config].count) should] equal:theValue(0)];
             });
             
             it(@"remove only block with key", ^{
-                [[theValue([[HEM responseBlocks] count]) should] equal:theValue(0)];
+                [[HEM allBlocksForConfiguration:kHTTPExpressManagerDefaultConfigurationKey] shouldBeNil];
+                
                 NSString* keepResponse = @"Keep Response";
                 NSURL* keepURL = [HEM urlWithPath:@"/keep"];
                 
-                NSString* key = [HEM connectEvaluateBlock:HEBEvalString(@"/url") withResponseBlock:HEBResponse(@"response")];
+                NSString* key = [HEM connectEvaluateBlock:HEBEvalString(@"/removeMe") withResponseBlock:HEBResponse(@"deleted")];
                 [HEM connectEvaluateBlock:HEBEvalUrl(keepURL) withResponseBlock:HEBResponse(keepResponse)];
                 
-                [[theValue([[HEM responseBlocks] count]) should] equal:theValue(2)];
+                [[theValue([HEM allBlocksForConfiguration:kHTTPExpressManagerDefaultConfigurationKey].count) should] equal:theValue(2)];
                 [HEM removeBlocksForKey:key];
-                [[theValue([[HEM responseBlocks] count]) should] equal:theValue(1)];
+                [[theValue([HEM allBlocksForConfiguration:kHTTPExpressManagerDefaultConfigurationKey].count) should] equal:theValue(1)];
                 
                 NSString* content = [NSString stringWithContentsOfURL:keepURL
                                                              encoding:NSUTF8StringEncoding error:nil];
@@ -119,7 +143,7 @@ describe(@"HTTPExpressConnectionSpec", ^{
                                                         returningResponse:&response
                                                                     error:&error];
                 [error shouldBeNil];
-                [[data shouldEventually] equal:content];
+                [[data should] equal:content];
                 
                 [HEM removeBlocksForKey:key];
             });
@@ -146,6 +170,51 @@ describe(@"HTTPExpressConnectionSpec", ^{
                     
                     [HEM removeBlocksForKey:key];
                 });
+            });
+        });
+        
+        context(@"Deeper Configuration Test", ^{
+            it(@"Same url different config", ^{
+                
+                NSURL* url = [HEM urlWithPath:@"/configURL"];
+                HTTPExpressEvaluateBlock eval = HEBEvalUrl(url);
+                
+                NSString* config1 = @"config1";
+                NSString* config1Response = @"response for config 1";
+                HTTPExpressResponseBlock response1 = HEBResponse(config1Response);
+                [HEM connectEvaluateBlock:eval
+                        withResponseBlock:response1
+                         forConfiguration:config1];
+            
+                
+                NSString* config2 = @"config2";
+                NSString* config2Response = @"response for config 2";
+                HTTPExpressResponseBlock response2 = HEBResponse(config2Response);
+                [HEM connectEvaluateBlock:eval
+                        withResponseBlock:response2
+                         forConfiguration:config2];
+                
+                [[theValue([HEM allBlocksForConfiguration:config1].count) should] equal:theValue(1)];
+                [[theValue([HEM allBlocksForConfiguration:config2].count) should] equal:theValue(1)];
+                
+                
+                HEM.activeConfiguration = config1;
+                NSData* data = [NSURLConnection sendSynchronousRequest:[NSURLRequest requestWithURL:url]
+                                                     returningResponse:nil
+                                                                 error:nil];
+                NSString* responseString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                [[responseString should] equal:config1Response];
+
+                HEM.activeConfiguration = config2;
+                data = [NSURLConnection sendSynchronousRequest:[NSURLRequest requestWithURL:url]
+                                             returningResponse:nil
+                                                         error:nil];
+                responseString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                [[responseString should] equal:config2Response];
+                
+                [HEM removeAllExpressBlocks];
+                [[HEM allBlocksForConfiguration:config1] shouldBeNil];
+                [[HEM allBlocksForConfiguration:config2] shouldBeNil];
             });
         });
     });

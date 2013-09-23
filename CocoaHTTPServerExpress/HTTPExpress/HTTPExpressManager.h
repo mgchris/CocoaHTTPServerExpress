@@ -13,6 +13,33 @@
 @class HTTPExpressReponseManager;
 @class HTTPServer;
 
+/**
+ This is the default configuration key used for grouping evaluation and response blocks
+ @see activeConfiguration
+ */
+static NSString * const kHTTPExpressManagerDefaultConfigurationKey = @"default";
+
+
+#pragma mark - Dictionary Keys
+/**
+ Key for retrieving Evaluate block in Dictionary.
+ @see blocksForKey:
+ */
+static NSString * const kHTTPExpressManagerDictionaryKeyEvaluate = @"evaluate";
+
+/**
+ Key for retrieving Response block in Dictionary.
+ @see blocksForKey:
+ */
+static NSString * const kHTTPExpressManagerDictionaryKeyResponse = @"response";
+
+/**
+ Key for retrieving configuration block in Dictionary.
+ @see blocksForKey:
+ */
+static NSString * const kHTTPExpressManagerDictionaryKeyConfiguration = @"configuration";
+
+
 
 #pragma mark -
 @interface HTTPExpressManager : NSObject
@@ -23,9 +50,10 @@
 @property (nonatomic, strong) HTTPServer* httpServer;
 
 /**
- Hold all of the response blocks, managed by this object
+ The configuration that is currently being used for selecting evaluate and response blocks.  Defaults to kHTTPExpressManagerDefaultConfigurationKey
+ @see kHTTPExpressManagerDefaultConfigurationKey
  */
-@property (nonatomic, readonly, strong) NSMutableDictionary* responseBlocks;
+@property (nonatomic, copy) NSString* activeConfiguration;
 
 /**
  Access a singleton object that has default value setup for testing
@@ -48,13 +76,43 @@
 - (NSString*)generateKey;
 
 
-#pragma mark Response Methods
+#pragma mark blocks Methods
+/**
+ Calls connectEvaluateBlock:withResponseBlock:forConfiguration: uses the current activeConfiguration
+ */
+- (NSString*)connectEvaluateBlock:(HTTPExpressEvaluateBlock)evaluate withResponseBlock:(HTTPExpressResponseBlock)response;
+
 /**
  Add response block that will be fired when evaluate block return YES
+ @param evaluate The block use to see if a request should fire response
+ @param response The block called when evaluate block returns ture.
+ @param configurationKey What configuration this evaluate and response block belong too
  @return The key used to reference connected response and evaluate block.
  @discussion The evaluate blocks gets checked everytime responseForMessage: is called.
  */
-- (NSString*)connectEvaluateBlock:(HTTPExpressEvaluateBlock)evaluate withResponseBlock:(HTTPExpressResponseBlock)response;
+- (NSString*)connectEvaluateBlock:(HTTPExpressEvaluateBlock)evaluate
+                withResponseBlock:(HTTPExpressResponseBlock)response
+                 forConfiguration:(NSString*)configuration;
+
+/**
+ Returns blocks that match the given key
+ @param key The key created when added blocks
+ @return dictionary that will at least have the the follow keys: 
+        kHTTPExpressManagerDictionaryKeyEvaluate,
+        kHTTPExpressManagerDictionaryKeyResponse,
+        kHTTPExpressManagerDictionaryKeyConfiguration
+ */
+- (NSDictionary*)blocksForKey:(NSString*)key;
+
+
+/**
+ All blocks that are connected to a configuration.
+ @param config The configuration to use
+ @return Array of NSDictionary that have the same structure as those from blockForKey:
+ @see blockForKey:
+ */
+- (NSArray*)allBlocksForConfiguration:(NSString*)config;
+
 
 /**
  Remove blocks that match the key, that is generated from connectEvaluateBlock:withResponseBlock:
@@ -65,6 +123,11 @@
  Remove all evaluate and response blocks.
  */
 - (void)removeAllExpressBlocks;
+
+/**
+ Remove all blocks that are grouped with a target configuration
+ */
+- (void)removeBlocksForConfiguration:(NSString*)config;
 
 /**
  Who ever response to this method needs to return a response.  You may return nil
