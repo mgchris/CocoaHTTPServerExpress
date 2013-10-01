@@ -53,6 +53,7 @@ static NSString * const kHTTPExpressManagerConfigurationDictionaryKeyReference =
 - (id)init {
     self = [super init];
     if( self ) {
+        _supportedAllMethods = YES;
         _configurationBlocks = [[NSMutableDictionary alloc] init];
         
         HTTPServer* server = [[HTTPServer alloc] init];

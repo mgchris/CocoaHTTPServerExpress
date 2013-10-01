@@ -56,6 +56,12 @@ static NSString * const kHTTPExpressManagerDictionaryKeyConfiguration = @"config
 @property (nonatomic, copy) NSString* activeConfiguration;
 
 /**
+ *  If connection should accept all connects.
+ *  @discussion When a connect has a PUT / POST request, the server need to determine if it will handle the request.  If this is set to NO, it will called the evaluation blocks.  Default is YES.
+ */
+@property (nonatomic, assign) BOOL supportedAllMethods;
+
+/**
  Access a singleton object that has default value setup for testing
  */
 + (HTTPExpressManager*)defaultManager;
