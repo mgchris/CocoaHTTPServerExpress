@@ -2,7 +2,6 @@
 #import "Kiwi.h"
 
 #import "HTTPExpress.h"
-#import "HTTPServer.h"
 
 SPEC_BEGIN(HTTPExpressConnectionSpec)
 

@@ -13,7 +13,7 @@
 #import "HTTPExpressConnection.h"
 #import "HTTPExpressEvaluationBlockFactory.h"
 #import "HTTPExpressResponseBlockFactory.h"
-
+#import "HTTPServerExpress.h"
 
 #pragma mark - Reduce typing Helpers
 /*

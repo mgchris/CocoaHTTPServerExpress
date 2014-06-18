@@ -7,5 +7,8 @@
 //
 
 #import "HTTPConnection.h"
+@class HTTPExpressManager;
+
 @interface HTTPExpressConnection : HTTPConnection
+@property (atomic, retain) HTTPExpressManager* expressManager;
 @end

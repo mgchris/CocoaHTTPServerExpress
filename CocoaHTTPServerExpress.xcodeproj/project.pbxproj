@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5401BA141951125E000D4813 /* HTTPServerExpress.m in Sources */ = {isa = PBXBuildFile; fileRef = 5401BA131951125E000D4813 /* HTTPServerExpress.m */; };
+		5401BA151951125E000D4813 /* HTTPServerExpress.m in Sources */ = {isa = PBXBuildFile; fileRef = 5401BA131951125E000D4813 /* HTTPServerExpress.m */; };
 		5438178B17A2B86B006875B0 /* HTTPExpressErrors.m in Sources */ = {isa = PBXBuildFile; fileRef = 5438178A17A2B86B006875B0 /* HTTPExpressErrors.m */; };
 		547C5C2C1784CD1200B6A1E0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54A9976B1784CA9A00A60BF7 /* CoreGraphics.framework */; };
 		54A05C4117A042B400CB800B /* HTTPExpressResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 54A05C4017A042B400CB800B /* HTTPExpressResponse.m */; };
@@ -55,6 +57,8 @@
 
 /* Begin PBXFileReference section */
 		50586E65EE2645B086CB4880 /* Pods/Pods-CocoaHTTPServerExpressTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods/Pods-CocoaHTTPServerExpressTests.xcconfig"; sourceTree = SOURCE_ROOT; };
+		5401BA121951125E000D4813 /* HTTPServerExpress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPServerExpress.h; sourceTree = "<group>"; };
+		5401BA131951125E000D4813 /* HTTPServerExpress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPServerExpress.m; sourceTree = "<group>"; };
 		5438178A17A2B86B006875B0 /* HTTPExpressErrors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPExpressErrors.m; sourceTree = "<group>"; };
 		54A05C3F17A042B400CB800B /* HTTPExpressResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPExpressResponse.h; sourceTree = "<group>"; };
 		54A05C4017A042B400CB800B /* HTTPExpressResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPExpressResponse.m; sourceTree = "<group>"; };
@@ -225,6 +229,8 @@
 				54DDE0DF1797244F00E327CA /* HTTPExpressResponseBlockFactory.m */,
 				54A05C3F17A042B400CB800B /* HTTPExpressResponse.h */,
 				54A05C4017A042B400CB800B /* HTTPExpressResponse.m */,
+				5401BA121951125E000D4813 /* HTTPServerExpress.h */,
+				5401BA131951125E000D4813 /* HTTPServerExpress.m */,
 			);
 			name = HTTPExpress;
 			path = CocoaHTTPServerExpress/HTTPExpress;
@@ -406,6 +412,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				54A997741784CA9A00A60BF7 /* main.m in Sources */,
+				5401BA141951125E000D4813 /* HTTPServerExpress.m in Sources */,
 				54A997781784CA9A00A60BF7 /* AppDelegate.m in Sources */,
 				54A997811784CA9A00A60BF7 /* ViewController.m in Sources */,
 				54A997AD1784CB4B00A60BF7 /* HTTPExpressConnection.m in Sources */,
@@ -421,6 +428,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				54A997AE1784CB4B00A60BF7 /* HTTPExpressConnection.m in Sources */,
+				5401BA151951125E000D4813 /* HTTPServerExpress.m in Sources */,
 				54A997B41784CB4B00A60BF7 /* HTTPExpressManager.m in Sources */,
 				54A997B61784CB8600A60BF7 /* HTTPExpressConnectionSpec.m in Sources */,
 				54DDE0DC1797217100E327CA /* HTTPExpressEvaluationBlockFactory.m in Sources */,

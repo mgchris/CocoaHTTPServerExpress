@@ -12,7 +12,7 @@
 #import "HTTPDataResponse.h"
 #import "HTTPFileResponse.h"
 
-#import "HTTPServer.h"
+#import "HTTPServerExpress.h"
 #import "HTTPExpressConnection.h"
 
 #import "HTTPExpressEvaluationBlockFactory.h"
@@ -31,7 +31,7 @@ static NSString * const kHTTPExpressManagerConfigurationDictionaryKeyBlocks = @"
 static NSString * const kHTTPExpressManagerConfigurationDictionaryKeyReference = @"key";
 
 
-@interface HTTPExpressManager () {
+@interface HTTPExpressManager () <HTTPServerExpressDelegate> {
     NSMutableDictionary* _configurationBlocks;
 }
 
@@ -43,7 +43,9 @@ static NSString * const kHTTPExpressManagerConfigurationDictionaryKeyReference =
 + (HTTPExpressManager*)defaultManager {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        httpExpressManagerDefaultManagerInstance = [[HTTPExpressManager alloc] init];
+        if(httpExpressManagerDefaultManagerInstance == nil) {
+            httpExpressManagerDefaultManagerInstance = [[HTTPExpressManager alloc] init];
+        }
     });
     return httpExpressManagerDefaultManagerInstance;
 }
@@ -56,11 +58,13 @@ static NSString * const kHTTPExpressManagerConfigurationDictionaryKeyReference =
         _supportedAllMethods = YES;
         _configurationBlocks = [[NSMutableDictionary alloc] init];
         
-        HTTPServer* server = [[HTTPServer alloc] init];
+        HTTPServerExpress* server = [[HTTPServerExpress alloc] init];
         [server setType:@"_http._tcp."];
         [server setConnectionClass:[HTTPExpressConnection class]];
+        server.expressDelegate = self;
         _httpServer = server;
         _activeConfiguration = kHTTPExpressManagerDefaultConfigurationKey;
+        
         NSError* error = nil;
         if( [server start:&error] == NO ) {
             NSLog(@"Starting Server Error: %@", error);
@@ -224,4 +228,12 @@ static NSString * const kHTTPExpressManagerConfigurationDictionaryKeyReference =
     
 }
 
+
+#pragma mark ServerExpress
+- (HTTPExpressManager*)connectionNeedExpressManager {
+    return self;
+}
+
 @end
+
+

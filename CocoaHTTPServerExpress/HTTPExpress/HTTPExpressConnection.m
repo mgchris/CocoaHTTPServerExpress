@@ -23,7 +23,14 @@
 @implementation HTTPExpressConnection
 
 - (void)replyToHTTPRequest {
-    HTTPExpressResponse* response = [[HTTPExpressManager defaultManager] responseForMessage:request];
+    HTTPExpressResponse* response = nil;
+    
+    if(self.expressManager) {
+        response = [self.expressManager responseForMessage:request];
+    } else {
+        response = [[HTTPExpressManager defaultManager] responseForMessage:request];
+    }
+    
     if ( response == nil ) {
 		[self handleResourceNotFound];
 	} else {

@@ -11,7 +11,7 @@
 #import "HTTPExpressContant.h"
 
 @class HTTPExpressReponseManager;
-@class HTTPServer;
+@class HTTPServerExpress;
 
 /**
  This is the default configuration key used for grouping evaluation and response blocks
@@ -47,7 +47,7 @@ static NSString * const kHTTPExpressManagerDictionaryKeyConfiguration = @"config
 /**
  Instance of HttpServer that is used by the defaultManager
  */
-@property (nonatomic, strong) HTTPServer* httpServer;
+@property (nonatomic, strong) HTTPServerExpress* httpServer;
 
 /**
  The configuration that is currently being used for selecting evaluate and response blocks.  Defaults to kHTTPExpressManagerDefaultConfigurationKey
