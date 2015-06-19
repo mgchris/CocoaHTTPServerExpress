@@ -24,7 +24,7 @@ Here is a simple testing example:
 
 ### CocoaPods
 
-1. Add Expecta to your project's `Podfile`:
+1. Add CocoaHTTPServerExpress to your project's `Podfile`:
 
 	```ruby
 	target :MyApp do
