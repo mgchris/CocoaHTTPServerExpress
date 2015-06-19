@@ -21,5 +21,3 @@ Here is a simple testing example:
     XCTAssertTrue([expectedString isEqualToString:string], @"Strings do not match! expected: %@  got: %@", expectedString, string);
 }
 ```
-
-This project is inspired by iOS-FakeWeb and Express.js
