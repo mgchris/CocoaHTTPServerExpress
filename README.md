@@ -32,7 +32,7 @@ Here is a simple testing example:
 	end
 
 	target :MyAppTests do
-	  pod 'CocoaHTTPServerExpress', '~> 0.0.3.2'
+	  pod 'CocoaHTTPServerExpress', :git => 'https://github.com/mgchris/CocoaHTTPServerExpress.git'
 	end
 	```
 	
