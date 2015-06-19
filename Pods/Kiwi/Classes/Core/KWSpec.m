@@ -5,16 +5,13 @@
 //
 
 #import "KWSpec.h"
-#import <objc/runtime.h>
+#import "KWCallSite.h"
 #import "KWExample.h"
 #import "KWExampleSuiteBuilder.h"
-#import "KWIntercept.h"
-#import "KWObjCUtilities.h"
-#import "KWStringUtilities.h"
-#import "NSMethodSignature+KiwiAdditions.h"
 #import "KWFailure.h"
 #import "KWExampleSuite.h"
 
+#import <objc/runtime.h>
 
 @interface KWSpec()
 
@@ -30,40 +27,20 @@
 
 + (void)buildExampleGroups {}
 
-/* Reported by XCode SenTestingKit Runner before and after invocation of the test
-   Use camel case to make method friendly names from example description
- */
+- (NSString *)name {
+    return [self description];
+}
+
+/* Use camel case to make method friendly names from example description. */
 
 - (NSString *)description {
-    KWExample *currentExample = self.currentExample ? self.currentExample : [[self invocation] kw_example];
-    NSString *name = [currentExample descriptionWithContext];
-    
-    // CamelCase the string
-    NSArray *words = [name componentsSeparatedByString:@" "];
-    name = @"";
-    for (NSString *word in words) {
-        if ([word length] < 1)
-        {
-            continue;
-        }
-        name = [name stringByAppendingString:[[word substringToIndex:1] uppercaseString]];
-        name = [name stringByAppendingString:[word substringFromIndex:1]];
-    }
-    
-    // Replace the commas with underscores to separate the levels of context
-    name = [name stringByReplacingOccurrencesOfString:@"," withString:@"_"];
-    
-    // Strip out characters not legal in function names
-    NSError *error = nil;
-    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"[^a-zA-Z0-9_]*" options:0 error:&error];
-    name = [regex stringByReplacingMatchesInString:name options:0 range:NSMakeRange(0, name.length) withTemplate:@""];
-
-    return [NSString stringWithFormat:@"-[%@ %@]", NSStringFromClass([self class]), name];
+    KWExample *currentExample = self.currentExample ?: self.invocation.kw_example;
+    return [NSString stringWithFormat:@"-[%@ %@]", NSStringFromClass([self class]), currentExample.selectorName];
 }
 
 #pragma mark - Getting Invocations
 
-/* Called by the SenTestingKit test suite to get an array of invocations that
+/* Called by the XCTest to get an array of invocations that
    should be run on instances of test cases. */
 
 + (NSArray *)testInvocations {
@@ -76,32 +53,57 @@
     KWExampleSuite *exampleSuite = [[KWExampleSuiteBuilder sharedExampleSuiteBuilder] buildExampleSuite:^{
         [self buildExampleGroups];
     }];
-  
-    return [exampleSuite invocationsForTestCase];
+
+    NSMutableArray *invocations = [NSMutableArray new];
+    for (KWExample *example in exampleSuite) {
+        SEL selector = [self addInstanceMethodForExample:example];
+        NSInvocation *invocation = [self invocationForExample:example selector:selector];
+        [invocations addObject:invocation];
+    }
+
+    return invocations;
+}
+
++ (SEL)addInstanceMethodForExample:(KWExample *)example {
+    Method method = class_getInstanceMethod(self, @selector(runExample));
+    SEL selector = NSSelectorFromString(example.selectorName);
+    IMP implementation = method_getImplementation(method);
+    const char *types = method_getTypeEncoding(method);
+    class_addMethod(self, selector, implementation, types);
+    return selector;
+}
+
++ (NSInvocation *)invocationForExample:(KWExample *)example selector:(SEL)selector {
+    NSMethodSignature *signature = [NSMethodSignature signatureWithObjCTypes:"v@:"];
+    NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:signature];
+    invocation.kw_example = example;
+    invocation.selector = selector;
+    return invocation;
 }
 
 #pragma mark - Running Specs
 
-- (void)invokeTest {
-    self.currentExample = [[self invocation] kw_example];
+- (void)runExample {
+    self.currentExample = self.invocation.kw_example;
 
     @autoreleasepool {
-
         @try {
             [self.currentExample runWithDelegate:self];
         } @catch (NSException *exception) {
-            [self failWithException:exception];
+            [self recordFailureWithDescription:exception.description inFile:@"" atLine:0 expected:NO];
         }
-        
-        [[self invocation] kw_setExample:nil];
-    
+
+        self.invocation.kw_example = nil;
     }
 }
 
 #pragma mark - KWExampleGroupDelegate methods
 
 - (void)example:(KWExample *)example didFailWithFailure:(KWFailure *)failure {
-    [self failWithException:[failure exceptionValue]];
+    [self recordFailureWithDescription:failure.message
+                                inFile:failure.callSite.filename
+                                atLine:failure.callSite.lineNumber
+                              expected:NO];
 }
 
 #pragma mark - Verification proxies
@@ -118,7 +120,7 @@
     return [[[KWExampleSuiteBuilder sharedExampleSuiteBuilder] currentExample] addMatchVerifierWithExpectationType:anExpectationType callSite:aCallSite];
 }
 
-+ (id)addAsyncVerifierWithExpectationType:(KWExpectationType)anExpectationType callSite:(KWCallSite *)aCallSite timeout:(NSInteger)timeout shouldWait:(BOOL)shouldWait {
++ (id)addAsyncVerifierWithExpectationType:(KWExpectationType)anExpectationType callSite:(KWCallSite *)aCallSite timeout:(NSTimeInterval)timeout shouldWait:(BOOL)shouldWait {
     return [[[KWExampleSuiteBuilder sharedExampleSuiteBuilder] currentExample] addAsyncVerifierWithExpectationType:anExpectationType callSite:aCallSite timeout:timeout shouldWait: shouldWait];
 }
 

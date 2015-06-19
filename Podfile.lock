@@ -1,23 +1,26 @@
 PODS:
-  - CocoaAsyncSocket (7.3.1)
+  - CocoaAsyncSocket (7.4.1)
   - CocoaHTTPServer (2.3):
     - CocoaAsyncSocket
     - CocoaLumberjack
-  - CocoaLumberjack (1.6.2)
-  - Kiwi (2.2.1):
-    - Kiwi/ARC
-    - Kiwi/NonARC
-  - Kiwi/ARC (2.2.1)
-  - Kiwi/NonARC (2.2.1)
+  - CocoaLumberjack (2.0.0):
+    - CocoaLumberjack/Default (= 2.0.0)
+    - CocoaLumberjack/Extensions (= 2.0.0)
+  - CocoaLumberjack/Core (2.0.0)
+  - CocoaLumberjack/Default (2.0.0):
+    - CocoaLumberjack/Core
+  - CocoaLumberjack/Extensions (2.0.0):
+    - CocoaLumberjack/Default
+  - Kiwi (2.3.1)
 
 DEPENDENCIES:
   - CocoaHTTPServer
   - Kiwi
 
 SPEC CHECKSUMS:
-  CocoaAsyncSocket: 6e59036ecae1e93d6c78f5766149983ceac558ba
-  CocoaHTTPServer: 7c2fce6617f7fda0e3f4fc34f96e562caa7c7bd8
-  CocoaLumberjack: d73e1e317ced14ab930797dda6c17156ff17aaa1
-  Kiwi: e6524ba0eaa1b28af7af146bdee5314b32aa3edb
+  CocoaAsyncSocket: 7cbf214b27f8e7f7574db6a3fd96352ffaed433d
+  CocoaHTTPServer: 5624681fc3473d43b18202f635f9b3abb013b530
+  CocoaLumberjack: a6f77d987d65dc7ba86b0f84db7d0b9084f77bcb
+  Kiwi: f038a6c61f7a9e4d7766bff5717aa3b3fdb75f55
 
-COCOAPODS: 0.22.2
+COCOAPODS: 0.37.2

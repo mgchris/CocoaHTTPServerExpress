@@ -126,7 +126,7 @@
 
     // Return a dummy method signature so that problems can be handled in
     // -forwardInvocation:.
-    NSString *encoding = KWEncodingForVoidMethod();
+    NSString *encoding = KWEncodingForDefaultMethod();
     return [NSMethodSignature signatureWithObjCTypes:[encoding UTF8String]];
 }
 
@@ -142,11 +142,15 @@
                  NSStringFromSelector(anInvocation.selector)];
       [self.reporter reportFailure:failure];
     }
+        
+    if (self.expectationType == KWExpectationTypeShouldNot && [self.matcher respondsToSelector:@selector(setWillEvaluateAgainstNegativeExpectation:)]) {
+        [self.matcher setWillEvaluateAgainstNegativeExpectation:YES];
+    }
 
     if (self.example.unresolvedVerifier == self) {
         self.example.unresolvedVerifier = nil;
     }
-
+    
     [anInvocation invokeWithTarget:self.matcher];
 
 #if KW_TARGET_HAS_INVOCATION_EXCEPTION_BUG

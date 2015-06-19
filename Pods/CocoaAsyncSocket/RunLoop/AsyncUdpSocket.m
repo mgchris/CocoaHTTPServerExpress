@@ -13,6 +13,7 @@
 #endif
 
 #import "AsyncUdpSocket.h"
+#import <TargetConditionals.h>
 #import <sys/socket.h>
 #import <netinet/in.h>
 #import <arpa/inet.h>
@@ -252,6 +253,18 @@ static void MyCFSocketCallback(CFSocketRef, CFSocketCallBackType, CFDataRef, con
 		if(theSocket6)
 		{
 			CFSocketSetSocketFlags(theSocket6, kCFSocketCloseOnInvalidate);
+		}
+		
+		// Prevent sendto calls from sending SIGPIPE signal when socket has been shutdown for writing.
+		// sendto will instead let us handle errors as usual by returning -1.
+		int noSigPipe = 1;
+		if(theSocket4)
+		{
+			setsockopt(CFSocketGetNative(theSocket4), SOL_SOCKET, SO_NOSIGPIPE, &noSigPipe, sizeof(noSigPipe));
+		}
+		if(theSocket6)
+		{
+			setsockopt(CFSocketGetNative(theSocket6), SOL_SOCKET, SO_NOSIGPIPE, &noSigPipe, sizeof(noSigPipe));
 		}
 		
 		// Get the CFRunLoop to which the socket should be attached.
@@ -2076,6 +2089,7 @@ static void MyCFSocketCallback(CFSocketRef, CFSocketCallBackType, CFDataRef, con
 		
 			if([self hasBytesAvailable:theSocket])
 			{
+                NSData* bufferData = nil;
 				ssize_t result;
 				CFSocketNativeHandle theNativeSocket = CFSocketGetNative(theSocket);
 				
@@ -2109,9 +2123,10 @@ static void MyCFSocketCallback(CFSocketRef, CFSocketCallBackType, CFDataRef, con
 							{
 								buf = realloc(buf, result);
 							}
-							theCurrentReceive->buffer = [[NSData alloc] initWithBytesNoCopy:buf
+                            bufferData = [[NSData alloc] initWithBytesNoCopy:buf
 																					 length:result
 																			   freeWhenDone:YES];
+							theCurrentReceive->buffer = bufferData;
 							theCurrentReceive->host = host;
 							theCurrentReceive->port = port;
 						}
@@ -2143,9 +2158,10 @@ static void MyCFSocketCallback(CFSocketRef, CFSocketCallBackType, CFDataRef, con
 							{
 								buf = realloc(buf, result);
 							}
-							theCurrentReceive->buffer = [[NSData alloc] initWithBytesNoCopy:buf
+                            bufferData = [[NSData alloc] initWithBytesNoCopy:buf
 																					 length:result
 																			   freeWhenDone:YES];
+							theCurrentReceive->buffer = bufferData;
 							theCurrentReceive->host = host;
 							theCurrentReceive->port = port;
 						}
@@ -2155,8 +2171,8 @@ static void MyCFSocketCallback(CFSocketRef, CFSocketCallBackType, CFDataRef, con
 				}
 				
 				// Check to see if we need to free our alloc'd buffer
-				// If the buffer is non-nil, this means it has taken ownership of the buffer
-				if(theCurrentReceive->buffer == nil)
+				// If bufferData is non-nil, it has taken ownership of the buffer
+				if(bufferData == nil)
 				{
 					free(buf);
 				}

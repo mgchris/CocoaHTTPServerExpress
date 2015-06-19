@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A682E181B347F0B00F98936 /* HTTPExpressManager+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A682E171B347F0B00F98936 /* HTTPExpressManager+Additions.m */; };
+		0A682E1A1B34805200F98936 /* HTTPExpressSimpleExampleTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A682E191B34805200F98936 /* HTTPExpressSimpleExampleTest.m */; };
+		0AE8CD451B34882100B033F8 /* HTTPExpressManager+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A682E171B347F0B00F98936 /* HTTPExpressManager+Additions.m */; };
 		5401BA141951125E000D4813 /* HTTPServerExpress.m in Sources */ = {isa = PBXBuildFile; fileRef = 5401BA131951125E000D4813 /* HTTPServerExpress.m */; };
 		5401BA151951125E000D4813 /* HTTPServerExpress.m in Sources */ = {isa = PBXBuildFile; fileRef = 5401BA131951125E000D4813 /* HTTPServerExpress.m */; };
 		5438178B17A2B86B006875B0 /* HTTPExpressErrors.m in Sources */ = {isa = PBXBuildFile; fileRef = 5438178A17A2B86B006875B0 /* HTTPExpressErrors.m */; };
@@ -24,7 +27,6 @@
 		54A9977E1784CA9A00A60BF7 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 54A9977D1784CA9A00A60BF7 /* Default-568h@2x.png */; };
 		54A997811784CA9A00A60BF7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 54A997801784CA9A00A60BF7 /* ViewController.m */; };
 		54A997841784CA9A00A60BF7 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 54A997821784CA9A00A60BF7 /* ViewController.xib */; };
-		54A9978C1784CA9A00A60BF7 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54A9978B1784CA9A00A60BF7 /* SenTestingKit.framework */; };
 		54A9978D1784CA9A00A60BF7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54A997671784CA9A00A60BF7 /* UIKit.framework */; };
 		54A9978E1784CA9A00A60BF7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54A997691784CA9A00A60BF7 /* Foundation.framework */; };
 		54A997961784CA9A00A60BF7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 54A997941784CA9A00A60BF7 /* InfoPlist.strings */; };
@@ -56,7 +58,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		50586E65EE2645B086CB4880 /* Pods/Pods-CocoaHTTPServerExpressTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods/Pods-CocoaHTTPServerExpressTests.xcconfig"; sourceTree = SOURCE_ROOT; };
+		01FD1D13C6037B5CBE7ADEDD /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		0A682E161B347F0B00F98936 /* HTTPExpressManager+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HTTPExpressManager+Additions.h"; sourceTree = "<group>"; };
+		0A682E171B347F0B00F98936 /* HTTPExpressManager+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "HTTPExpressManager+Additions.m"; sourceTree = "<group>"; };
+		0A682E191B34805200F98936 /* HTTPExpressSimpleExampleTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPExpressSimpleExampleTest.m; sourceTree = "<group>"; };
 		5401BA121951125E000D4813 /* HTTPServerExpress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPServerExpress.h; sourceTree = "<group>"; };
 		5401BA131951125E000D4813 /* HTTPServerExpress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPServerExpress.m; sourceTree = "<group>"; };
 		5438178A17A2B86B006875B0 /* HTTPExpressErrors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPExpressErrors.m; sourceTree = "<group>"; };
@@ -78,8 +83,7 @@
 		54A9977F1784CA9A00A60BF7 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		54A997801784CA9A00A60BF7 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		54A997831784CA9A00A60BF7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController.xib; sourceTree = "<group>"; };
-		54A9978A1784CA9A00A60BF7 /* CocoaHTTPServerExpressTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CocoaHTTPServerExpressTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
-		54A9978B1784CA9A00A60BF7 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		54A9978A1784CA9A00A60BF7 /* CocoaHTTPServerExpressTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CocoaHTTPServerExpressTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		54A997931784CA9A00A60BF7 /* CocoaHTTPServerExpressTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CocoaHTTPServerExpressTests-Info.plist"; sourceTree = "<group>"; };
 		54A997951784CA9A00A60BF7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		54A997A41784CB4B00A60BF7 /* HTTPExpress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPExpress.h; sourceTree = "<group>"; };
@@ -98,8 +102,10 @@
 		54DDE0E61797635E00E327CA /* HTTPExpressResponseBlockFactorySpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPExpressResponseBlockFactorySpec.m; sourceTree = "<group>"; };
 		54E305AE17B1BA8B00101365 /* HTTPExpressIntegrationSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPExpressIntegrationSpec.m; sourceTree = "<group>"; };
 		7E3CA9A64F05435196826B1D /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		80A19DA11CF1E77E0AD183BA /* Pods-CocoaHTTPServerExpressTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CocoaHTTPServerExpressTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CocoaHTTPServerExpressTests/Pods-CocoaHTTPServerExpressTests.debug.xcconfig"; sourceTree = "<group>"; };
+		954B8C84F63E7CC23D5A95F4 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		E559589CDE68C7FE6CC7AD2C /* Pods-CocoaHTTPServerExpressTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CocoaHTTPServerExpressTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-CocoaHTTPServerExpressTests/Pods-CocoaHTTPServerExpressTests.release.xcconfig"; sourceTree = "<group>"; };
 		E7A1F9461BDE437692548512 /* libPods-CocoaHTTPServerExpressTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CocoaHTTPServerExpressTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		E7A3BAA02D564CCA956748DA /* Pods/Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,7 +124,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				54A9978C1784CA9A00A60BF7 /* SenTestingKit.framework in Frameworks */,
 				54A9978D1784CA9A00A60BF7 /* UIKit.framework in Frameworks */,
 				54A9978E1784CA9A00A60BF7 /* Foundation.framework in Frameworks */,
 				B30434147EB54529B3C87484 /* libPods-CocoaHTTPServerExpressTests.a in Frameworks */,
@@ -137,8 +142,7 @@
 				54A997911784CA9A00A60BF7 /* CocoaHTTPServerExpressTests */,
 				54A997661784CA9A00A60BF7 /* Frameworks */,
 				54A997651784CA9A00A60BF7 /* Products */,
-				E7A3BAA02D564CCA956748DA /* Pods/Pods.xcconfig */,
-				50586E65EE2645B086CB4880 /* Pods/Pods-CocoaHTTPServerExpressTests.xcconfig */,
+				9A83341C03B7B7654131DC04 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -146,7 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				54A997641784CA9A00A60BF7 /* CocoaHTTPServerExpress.app */,
-				54A9978A1784CA9A00A60BF7 /* CocoaHTTPServerExpressTests.octest */,
+				54A9978A1784CA9A00A60BF7 /* CocoaHTTPServerExpressTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -157,7 +161,6 @@
 				54A997671784CA9A00A60BF7 /* UIKit.framework */,
 				54A997691784CA9A00A60BF7 /* Foundation.framework */,
 				54A9976B1784CA9A00A60BF7 /* CoreGraphics.framework */,
-				54A9978B1784CA9A00A60BF7 /* SenTestingKit.framework */,
 				7E3CA9A64F05435196826B1D /* libPods.a */,
 				E7A1F9461BDE437692548512 /* libPods-CocoaHTTPServerExpressTests.a */,
 			);
@@ -194,6 +197,7 @@
 		54A997911784CA9A00A60BF7 /* CocoaHTTPServerExpressTests */ = {
 			isa = PBXGroup;
 			children = (
+				0A682E191B34805200F98936 /* HTTPExpressSimpleExampleTest.m */,
 				54A997B51784CB8600A60BF7 /* HTTPExpressConnectionSpec.m */,
 				54DDE0E417975C1400E327CA /* HTTPExpressEvaluationBlockFactorySpec.m */,
 				54DDE0E61797635E00E327CA /* HTTPExpressResponseBlockFactorySpec.m */,
@@ -231,9 +235,22 @@
 				54A05C4017A042B400CB800B /* HTTPExpressResponse.m */,
 				5401BA121951125E000D4813 /* HTTPServerExpress.h */,
 				5401BA131951125E000D4813 /* HTTPServerExpress.m */,
+				0A682E161B347F0B00F98936 /* HTTPExpressManager+Additions.h */,
+				0A682E171B347F0B00F98936 /* HTTPExpressManager+Additions.m */,
 			);
 			name = HTTPExpress;
 			path = CocoaHTTPServerExpress/HTTPExpress;
+			sourceTree = "<group>";
+		};
+		9A83341C03B7B7654131DC04 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				01FD1D13C6037B5CBE7ADEDD /* Pods.debug.xcconfig */,
+				954B8C84F63E7CC23D5A95F4 /* Pods.release.xcconfig */,
+				80A19DA11CF1E77E0AD183BA /* Pods-CocoaHTTPServerExpressTests.debug.xcconfig */,
+				E559589CDE68C7FE6CC7AD2C /* Pods-CocoaHTTPServerExpressTests.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -276,8 +293,8 @@
 			);
 			name = CocoaHTTPServerExpressTests;
 			productName = CocoaHTTPServerExpressTests;
-			productReference = 54A9978A1784CA9A00A60BF7 /* CocoaHTTPServerExpressTests.octest */;
-			productType = "com.apple.product-type.bundle";
+			productReference = 54A9978A1784CA9A00A60BF7 /* CocoaHTTPServerExpressTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -285,6 +302,7 @@
 		54A9975C1784CA9A00A60BF7 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastTestingUpgradeCheck = 0630;
 				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = "Christopher Evans";
 			};
@@ -356,7 +374,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-CocoaHTTPServerExpressTests-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CocoaHTTPServerExpressTests/Pods-CocoaHTTPServerExpressTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		B6B38BA1BE064EFF8981D01E /* Check Pods Manifest.lock */ = {
@@ -386,7 +404,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		BDDC4D82C8EA4FE68CFA3DD6 /* Check Pods Manifest.lock */ = {
@@ -419,6 +437,7 @@
 				54A997B31784CB4B00A60BF7 /* HTTPExpressManager.m in Sources */,
 				54DDE0DB1797217100E327CA /* HTTPExpressEvaluationBlockFactory.m in Sources */,
 				54DDE0E01797244F00E327CA /* HTTPExpressResponseBlockFactory.m in Sources */,
+				0A682E181B347F0B00F98936 /* HTTPExpressManager+Additions.m in Sources */,
 				54A05C4117A042B400CB800B /* HTTPExpressResponse.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -436,7 +455,9 @@
 				54DDE0E517975C1400E327CA /* HTTPExpressEvaluationBlockFactorySpec.m in Sources */,
 				54DDE0E71797635E00E327CA /* HTTPExpressResponseBlockFactorySpec.m in Sources */,
 				54A05C4217A042B400CB800B /* HTTPExpressResponse.m in Sources */,
+				0AE8CD451B34882100B033F8 /* HTTPExpressManager+Additions.m in Sources */,
 				5438178B17A2B86B006875B0 /* HTTPExpressErrors.m in Sources */,
+				0A682E1A1B34805200F98936 /* HTTPExpressSimpleExampleTest.m in Sources */,
 				54E305AF17B1BA8B00101365 /* HTTPExpressIntegrationSpec.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -537,7 +558,7 @@
 		};
 		54A9979D1784CA9A00A60BF7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E7A3BAA02D564CCA956748DA /* Pods/Pods.xcconfig */;
+			baseConfigurationReference = 01FD1D13C6037B5CBE7ADEDD /* Pods.debug.xcconfig */;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CocoaHTTPServerExpress/CocoaHTTPServerExpress-Prefix.pch";
@@ -549,7 +570,7 @@
 		};
 		54A9979E1784CA9A00A60BF7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E7A3BAA02D564CCA956748DA /* Pods/Pods.xcconfig */;
+			baseConfigurationReference = 954B8C84F63E7CC23D5A95F4 /* Pods.release.xcconfig */;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CocoaHTTPServerExpress/CocoaHTTPServerExpress-Prefix.pch";
@@ -561,7 +582,7 @@
 		};
 		54A997A01784CA9A00A60BF7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 50586E65EE2645B086CB4880 /* Pods/Pods-CocoaHTTPServerExpressTests.xcconfig */;
+			baseConfigurationReference = 80A19DA11CF1E77E0AD183BA /* Pods-CocoaHTTPServerExpressTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/CocoaHTTPServerExpress.app/CocoaHTTPServerExpress";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -574,13 +595,12 @@
 				INFOPLIST_FILE = "CocoaHTTPServerExpressTests/CocoaHTTPServerExpressTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
 			};
 			name = Debug;
 		};
 		54A997A11784CA9A00A60BF7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 50586E65EE2645B086CB4880 /* Pods/Pods-CocoaHTTPServerExpressTests.xcconfig */;
+			baseConfigurationReference = E559589CDE68C7FE6CC7AD2C /* Pods-CocoaHTTPServerExpressTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/CocoaHTTPServerExpress.app/CocoaHTTPServerExpress";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -593,7 +613,6 @@
 				INFOPLIST_FILE = "CocoaHTTPServerExpressTests/CocoaHTTPServerExpressTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
 			};
 			name = Release;
 		};
