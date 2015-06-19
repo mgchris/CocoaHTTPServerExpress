@@ -8,12 +8,12 @@ Here is a simple testing example:
 ```
 - (void)testGetStringFromServer {
     
-    // Setup Manager
+    // Create Manager
     HTTPExpressManager* server = [[HTTPExpressManager alloc] init]; // Create instead of manager (server)
+    
+    // Connect request and response to server
     NSURL* expectedURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/string.media", [server urlStringForHost]]];
     NSString* expectedString = @"This is what we expect to get back";
-    
-    // Connect request and response to the server
     [server connectURL:expectedURL withString:expectedString];
     
     // Test
