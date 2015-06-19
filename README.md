@@ -5,7 +5,7 @@ The goal is to be an embedded HTTP Server used for testing. The idea is for your
 
 Here is a simple testing example:
 
-```
+```objective-c
 - (void)testGetStringFromServer {
     
     // Create Manager
@@ -21,3 +21,19 @@ Here is a simple testing example:
     XCTAssertTrue([expectedString isEqualToString:string], @"Strings do not match! expected: %@  got: %@", expectedString, string);
 }
 ```
+
+### CocoaPods
+
+1. Add Expecta to your project's `Podfile`:
+
+	```ruby
+	target :MyApp do
+	# Your app's dependencies
+	end
+
+	target :MyAppTests do
+	  pod 'CocoaHTTPServerExpress', '~> 1.0.0'
+	end
+	```
+	
+2. Run `pod update` or `pod install` in your project directory.
