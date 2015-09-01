@@ -8,6 +8,7 @@ Pod::Spec.new do |s|
   s.source         = { :git => 'https://github.com/mgchris/CocoaHTTPServerExpress.git', :tag => '0.0.3.1' }
   s.source_files   = 'CocoaHTTPServerExpress/HTTPExpress/**/*.{h,m}'
   s.platform = :ios, '7.0'
+  s.osx.deployment_target = '10.7'
   s.requires_arc   = true
   s.dependency "CocoaHTTPServer"
 end
